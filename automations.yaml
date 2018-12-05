@@ -1,1 +1,20 @@
-[]
+ # test automation from : https://www.home-assistant.io/getting-started/automation/
+  - alias: Check sensor value and show notification
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.random_sensor
+      above: 10
+    action:
+      service: persistent_notification.create
+      data:
+        message: "Sensor value greater than 10"
+  - id: login_failure
+    alias: 'Login Failure'
+    hide_entity: True
+    trigger:
+      platform: template
+      value_template: "{{ states('persistent_notification.httplogin') != 'unknown' }}"
+    action:
+      service: notify.ios_your_iphone
+      data:
+        message: Warning - Failed login attempt detected.
