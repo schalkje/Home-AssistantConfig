@@ -78,13 +78,46 @@ group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
 
+# Configuring MQTT on Hass.io
+# https://community.home-assistant.io/t/configuring-mqtt-on-hass-io/34040
+mqtt:
+  broker: core-mosquitto
+  username: !secret mqtt_username
+  password: !secret mqtt_password
+  client_id: home-assistant-1
+
+# based on example
+# https://www.home-assistant.io/components/mysensors/#presentation
+mysensors:
+  gateways:
+    - device: '/dev/ttyUSB0'
+      persistence_file: 'path/mysensors.json'
+      baud_rate: 38400
+      nodes:
+        1:
+          name: 'kitchen'
+    - device: '/dev/ttyACM0'
+      persistence_file: 'path/mysensors2.json'
+      baud_rate: 115200
+    - device: '192.168.1.18'
+      persistence_file: 'path/mysensors3.json'
+      tcp_port: 5003
+    - device: mqtt
+      persistence_file: 'path/mysensors4.json'
+      topic_in_prefix: 'mygateway1-out'
+      topic_out_prefix: 'mygateway1-in'
+  optimistic: false
+  persistence: true
+  retain: true
+  version: '2.0'
+
 # Side panel
 # Add configurator to the side panel
 panel_iframe:
   configurator:
     title: Configurator
     icon: mdi:wrench
-    url: http://hassio.local:3218
+    url: https://schalken.duckdns.org:3218
 
 device_tracker:
   - platform: bluetooth_tracker
@@ -115,3 +148,8 @@ zone:
     radius: 100
     icon: mdi:account-clock
 
+logger:
+  default: info
+  logs:
+    homeassistant.components.mysensors: debug
+    mysensors: debug
