@@ -81,27 +81,23 @@ script: !include scripts.yaml
 # Configuring MQTT on Hass.io
 # https://community.home-assistant.io/t/configuring-mqtt-on-hass-io/34040
 mqtt:
-  broker: core-mosquitto
+  broker: 192.168.1.18
   username: !secret mqtt_username
   password: !secret mqtt_password
   client_id: home-assistant-1
 
 # based on example
 # https://www.home-assistant.io/components/mysensors/#presentation
+# https://www.home-assistant.io/components/mysensors/
+# https://github.com/ghiglie/hassio-addons
 mysensors:
   gateways:
     - device: '/dev/ttyUSB0'
       persistence_file: 'path/mysensors.json'
-      baud_rate: 38400
+      baud_rate: 115200 #38400
       nodes:
         1:
           name: 'kitchen'
-    - device: '/dev/ttyACM0'
-      persistence_file: 'path/mysensors2.json'
-      baud_rate: 115200
-    - device: '192.168.1.18'
-      persistence_file: 'path/mysensors3.json'
-      tcp_port: 5003
     - device: mqtt
       persistence_file: 'path/mysensors4.json'
       topic_in_prefix: 'mygateway1-out'
