@@ -2,8 +2,8 @@ homeassistant:
   # Name of the location where Home Assistant is running
   name: Home
   # Location required to calculate the time the sun rises and sets
-  latitude: 0
-  longitude: 0
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude  
   # Impacts weather/sunrise data (altitude above sea level in meters)
   elevation: 0
   # metric for Metric, imperial for Imperial
@@ -23,15 +23,14 @@ frontend:
 config:
 
 # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-# http:
-#   base_url: example.duckdns.org:8123
 http:
-  base_url: schalken.duckdns.org:8123
+  base_url: https://schalken.duckdns.org:8123
   ssl_certificate: /ssl/fullchain.pem
   ssl_key: /ssl/privkey.pem
   ip_ban_enabled: True
   login_attempts_threshold: 3
   api_password: !secret http_password
+  
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -57,6 +56,27 @@ logbook:
 # Enables a map showing the location of tracked devices
 map:
 
+# Pick any icon that you can find on materialdesignicons.com and prefix the name with mdi:
+
+zone:
+  - name: Home
+    latitude: !secret home_latitude
+    longitude: !secret home_longitude
+    radius: 100
+    icon: mdi:home
+
+  - name: School
+    latitude: !secret school_latitude
+    longitude: !secret school_longitude
+    radius: 50
+    icon: mdi:school
+
+  - name: Van Lanschot Den Bosch
+    latitude: 51.691235 
+    longitude: 5.292575
+    radius: 100
+    icon: mdi:account-clock
+
 # Track the sun
 sun:
 
@@ -64,8 +84,6 @@ sun:
 sensor:
   # Weather prediction
   - platform: yr
-  # random sensor test
-  - platform: random
 
 # Text to speech
 tts:
@@ -77,75 +95,3 @@ cloud:
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
-
-# Configuring MQTT on Hass.io
-# https://community.home-assistant.io/t/configuring-mqtt-on-hass-io/34040
-mqtt:
-  broker: 192.168.1.18
-  username: !secret mqtt_username
-  password: !secret mqtt_password
-  client_id: home-assistant-1
-
-# based on example
-# https://www.home-assistant.io/components/mysensors/#presentation
-# https://www.home-assistant.io/components/mysensors/
-# https://github.com/ghiglie/hassio-addons
-mysensors:
-  gateways:
-    - device: '/dev/ttyUSB0'
-      persistence_file: 'path/mysensors.json'
-      baud_rate: 115200 #38400
-      nodes:
-        1:
-          name: 'kitchen'
-    - device: mqtt
-      persistence_file: 'path/mysensors4.json'
-      topic_in_prefix: 'mygateway1-out'
-      topic_out_prefix: 'mygateway1-in'
-  optimistic: false
-  persistence: true
-  retain: true
-  version: '2.0'
-
-# Side panel
-# Add configurator to the side panel
-panel_iframe:
-  configurator:
-    title: Configurator
-    icon: mdi:wrench
-    url: https://schalken.duckdns.org:3218
-
-device_tracker:
-  - platform: bluetooth_tracker
-  - platform: nmap_tracker
-    hosts: 192.168.1.0/24
-  - platform: icloud
-    username: !secret icloud_username
-    password: !secret icloud_password
-    account_name: !secret icloud_descriptive_name
-
-# Pick any icon that you can find on materialdesignicons.com and prefix the name with mdi:
-zone:
-  - name: Home
-    latitude: 51.611157
-    longitude: 4.806703
-    radius: 100
-    icon: mdi:home
-
-  - name: School
-    latitude: 51.606920
-    longitude: 4.813119
-    radius: 50
-    icon: mdi:school
-
-  - name: Van Lanschot Den Bosch
-    latitude: 51.691235 
-    longitude: 5.292575
-    radius: 100
-    icon: mdi:account-clock
-
-logger:
-  default: info
-  logs:
-    homeassistant.components.mysensors: debug
-    mysensors: debug
