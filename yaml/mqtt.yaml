@@ -1,18 +1,7 @@
 # REF: https://www.home-assistant.io/docs/mqtt/broker/#run-your-own
 # based on https://github.com/brahmafear/hass_config/blob/master/yaml/mqtt.yaml
-  # broker: 192.168.1.18
-  # port: 1883
+# stripped to: https://forum.mysensors.org/topic/5832/struggling-with-configure-yaml/21
+  broker: localhost
+  port: 1883
   client_id: home-assistant-1
   keepalive: 60
-  discovery: true
-  discovery_prefix: homeassistant
-  birth_message:
-    topic: '/hass/status'
-    payload: 'online'
-    qos: 1
-    retain: true
-  will_message:
-    topic: '/hass/status'
-    payload: 'offline'
-    qos: 1
-    retain: true

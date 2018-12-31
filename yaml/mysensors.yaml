@@ -1,7 +1,8 @@
   gateways:
   - device: mqtt
-    persistence_file: '/config/mysensors_devices.json'
-    tcp_port: 5003
+    persistence_file: '/home/homeassistant/mysensors4.json'
+    topic_in_prefix: 'mygateway1-out'
+    topic_out_prefix: 'mygateway1-in'
   version: 2.0
   persistence: true
   optimistic: false
