@@ -1,6 +1,6 @@
   gateways:
-  - device: '127.0.0.1'
-    persistence_file: '/mysensors_devices.json'
+  - device: mqtt
+    persistence_file: '/config/mysensors_devices.json'
     tcp_port: 5003
   version: 2.0
   persistence: true
