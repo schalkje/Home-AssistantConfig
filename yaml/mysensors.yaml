@@ -1,6 +1,6 @@
   gateways:
   - device: mqtt
-    persistence_file: '/home/homeassistant/.homeassistant/.storage/mysensors5.json'
+    persistence_file: '/config/mysensors/mysensors_devices.json'
     topic_in_prefix: 'mygateway1-out'
     topic_out_prefix: 'mygateway1-in'
   version: 2.0
