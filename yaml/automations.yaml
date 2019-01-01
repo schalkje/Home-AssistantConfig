@@ -18,3 +18,24 @@
       service: notify.ios_your_iphone
       data:
         message: Warning - Failed login attempt detected.
+  - alias: Hello World State
+    # https://www.home-assistant.io/docs/automation/trigger/
+    trigger:
+      platform: mqtt
+      # https://www.home-assistant.io/docs/automation/trigger/
+      topic: HellowWorld
+      # Optional
+      # payload: 'on'
+    action:
+      service: persistent_notification.create
+      data:
+        message: "HellowWorld MQTT Trigger"
+  - alias: HelloWorld Event
+    trigger:
+      platform: event
+      event_type: HelloWorld
+    action:
+      service: persistent_notification.create
+      data:
+        message: "HellowWorld Event"
+

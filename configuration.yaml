@@ -85,6 +85,11 @@ sensor:
   # Weather prediction
   - platform: yr
 
+sensor 1:
+  # Weather prediction
+  - platform: yr
+  
+
 # Text to speech
 tts:
   - platform: google
