@@ -8,6 +8,7 @@
 !*.js
 !yaml
 !node-red
+!mysensors
 
 # Ignore folders.
 .storage

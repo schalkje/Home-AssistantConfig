@@ -80,12 +80,20 @@ zone:
 # Track the sun
 sun:
 
-sensor: !include yaml/sensors.yaml
+weather:
+  - platform: buienradar
+    name: buienradar1
+    entity: brw
+    forecast: True
 
-# Sensors 
-sensor 1:
-  # Weather prediction
-  - platform: yr
+weather:
+  - platform: darksky
+    name: darksky
+    api_key: !secret darksky_API_KEY
+    mode: hourly # The forecast type. Can be hourly or daily. Default value: hourl
+
+
+sensor: !include yaml/sensors.yaml
 
 
 # Text to speech
