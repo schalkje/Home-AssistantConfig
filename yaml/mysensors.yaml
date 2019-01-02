@@ -1,8 +1,8 @@
   gateways:
   - device: mqtt
     persistence_file: '/config/mysensors/mysensors_devices.json'
-    topic_in_prefix: 'mygateway1-out'
-    topic_out_prefix: 'mygateway1-in'
+    topic_in_prefix: 'mysensors-in'
+    topic_out_prefix: 'mysensors-out'
   version: 2.0
   persistence: true
   optimistic: false

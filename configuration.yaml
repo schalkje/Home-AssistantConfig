@@ -13,8 +13,8 @@ homeassistant:
   # Customization file
   customize: !include yaml/customize.yaml
 
-# Show links to resources in log and frontend
-introduction:
+# Show links to resources in log and frontend; disable to hide
+# introduction:
 
 # Enables the frontend
 frontend:
@@ -57,7 +57,6 @@ logbook:
 map:
 
 # Pick any icon that you can find on materialdesignicons.com and prefix the name with mdi:
-
 zone:
   - name: Home
     latitude: !secret home_latitude
@@ -90,7 +89,7 @@ weather:
   - platform: darksky
     name: darksky
     api_key: !secret darksky_API_KEY
-    mode: hourly # The forecast type. Can be hourly or daily. Default value: hourl
+    mode: daily # The forecast type. Can be hourly or daily. Default value: hourly
 
 
 sensor: !include yaml/sensors.yaml
