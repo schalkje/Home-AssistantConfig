@@ -80,15 +80,13 @@ zone:
 # Track the sun
 sun:
 
-# Sensors
-sensor:
-  # Weather prediction
-  - platform: yr
+sensor: !include yaml/sensors.yaml
 
+# Sensors 
 sensor 1:
   # Weather prediction
   - platform: yr
-  
+
 
 # Text to speech
 tts:

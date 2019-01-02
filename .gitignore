@@ -5,7 +5,9 @@
 !*.yaml
 !.gitignore
 !*.md
+!*.js
 !yaml
+!node-red
 
 # Ignore folders.
 .storage
