@@ -79,13 +79,13 @@ zone:
 # Track the sun
 sun:
 
-weather:
+weather 1:
   - platform: buienradar
     name: buienradar1
     entity: brw
     forecast: True
 
-weather:
+weather 2:
   - platform: darksky
     name: darksky
     api_key: !secret darksky_API_KEY
@@ -94,10 +94,35 @@ weather:
 
 sensor: !include yaml/sensors.yaml
 
+# https://www.home-assistant.io/components/alarm_control_panel.manual/
+alarm_control_panel:
+  - platform: manual
+    name: alarm
+    code: 1234
+    pending_time: 30
+    delay_time: 20
+    trigger_time: 4
+    disarmed:
+      trigger_time: 0
+    armed_home:
+      pending_time: 0
+      delay_time: 0
+
 
 # Text to speech
 tts:
   - platform: google
+
+ios:
+
+# https://www.home-assistant.io/components/device_tracker.nmap_tracker/
+device_tracker:
+  - platform: nmap_tracker
+    hosts: 192.168.1.0/24
+    home_interval: 10
+    exclude:
+     - 192.168.1.18
+     - 192.168.1.19
 
 # Cloud
 cloud:
