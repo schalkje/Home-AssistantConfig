@@ -136,3 +136,4 @@ mysensors: !include yaml/mysensors.yaml
 group: !include yaml/groups.yaml
 automation: !include yaml/automations.yaml
 script: !include yaml/scripts.yaml
+light: !include yaml/lights.yaml
