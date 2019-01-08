@@ -137,3 +137,10 @@ group: !include yaml/groups.yaml
 automation: !include yaml/automations.yaml
 script: !include yaml/scripts.yaml
 light: !include yaml/lights.yaml
+
+
+# enable mqtt logging
+logger:
+  default: warning
+  logs:
+    homeassistant.components.mqtt: debug
