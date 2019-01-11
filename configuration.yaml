@@ -16,16 +16,9 @@ homeassistant:
 # Show links to resources in log and frontend; disable to hide
 # introduction:
 
-resources:
-  - url: /local/simple-thermostat/simple-thermostat.js?v=2
-    type: module
-
-custom_updater:
-  card_urls:
-    - https://raw.githubusercontent.com/nervetattoo/simple-thermostat/allow-updates/tracker.json
-
 # Enables the frontend
 frontend:
+  javascript_version: latest
 
 # Enables configuration UI
 config:
@@ -39,6 +32,10 @@ http:
   login_attempts_threshold: 3
   api_password: !secret http_password # legacy_api_password support has been enabled. If you don't require it, remove the 'api_password' from your http config.
   
+# climate:
+#   - platform: generic_thermostat
+#     name: Study
+#     target_sensor: sensor.2temperature
 
 # Checks for available updates
 # Note: This component will send some information about your system to

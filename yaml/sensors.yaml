@@ -9,3 +9,15 @@
       - pressure
   # Weather prediction
   - platform: yr
+  - platform: mqtt
+    name: "2 temperature"
+    state_topic: "mysensors-out/2/11/#"
+  - platform: mqtt
+    name: "2 humidity"
+    state_topic: "mysensors-out/2/10/#"    
+  - platform: mqtt
+    name: "3 temperature"
+    state_topic: "mysensors-out/3/11/#"
+  - platform: mqtt
+    name: "3 humidity"
+    state_topic: "mysensors-out/3/10/#"        
