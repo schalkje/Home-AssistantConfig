@@ -16,6 +16,14 @@ homeassistant:
 # Show links to resources in log and frontend; disable to hide
 # introduction:
 
+resources:
+  - url: /local/simple-thermostat/simple-thermostat.js?v=2
+    type: module
+
+custom_updater:
+  card_urls:
+    - https://raw.githubusercontent.com/nervetattoo/simple-thermostat/allow-updates/tracker.json
+
 # Enables the frontend
 frontend:
 
@@ -138,6 +146,11 @@ automation: !include yaml/automations.yaml
 script: !include yaml/scripts.yaml
 light: !include yaml/lights.yaml
 
+panel_iframe:
+ nodered:
+   title: 'Node-Red'
+   icon: 'mdi:shuffle-variant'
+   url: 'http://192.168.1.18:1880/'
 
 # enable mqtt logging
 logger:
