@@ -21,3 +21,6 @@
   - platform: mqtt
     name: "3 humidity"
     state_topic: "mysensors-out/3/10/#"        
+  - platform: mqtt
+    name: "3 heater"
+    state_topic: "mysensors-in/3/12"   

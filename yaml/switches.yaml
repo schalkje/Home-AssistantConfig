@@ -1,0 +1,3 @@
+  - platform: mqtt
+    name: "3 heater"
+    command_topic: "mysensors-in/3/12" 

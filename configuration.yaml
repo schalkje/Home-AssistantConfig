@@ -36,6 +36,21 @@ http:
 #   - platform: generic_thermostat
 #     name: Study
 #     target_sensor: sensor.2temperature
+climate:
+  - platform: generic_thermostat
+    name: LivingRoomm
+    heater: switch.3_heater
+    target_sensor: sensor.3_temperature
+    min_temp: 5
+    max_temp: 25
+    ac_mode: false
+    hot_tolerance: 0.5
+    cold_tolerance: 0.1
+    min_cyle_duration:
+      minutes: 5
+    keep_alive:
+      minutes: 30
+    initial_operation_mode: 'auto'
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -98,6 +113,7 @@ weather 2:
 
 
 sensor: !include yaml/sensors.yaml
+swticht: !include yaml/switches.yaml
 
 # https://www.home-assistant.io/components/alarm_control_panel.manual/
 alarm_control_panel:
