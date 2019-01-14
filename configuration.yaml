@@ -113,7 +113,7 @@ weather 2:
 
 
 sensor: !include yaml/sensors.yaml
-swticht: !include yaml/switches.yaml
+switch: !include yaml/switches.yaml
 
 # https://www.home-assistant.io/components/alarm_control_panel.manual/
 alarm_control_panel:
