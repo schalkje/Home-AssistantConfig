@@ -23,6 +23,11 @@ homeassistant:
 frontend:
   javascript_version: latest
 
+# Swtich to Lovelace YAML mode
+#     https://www.home-assistant.io/lovelace/yaml-mode/
+lovelace:
+  mode: yaml
+
 # Enables configuration UI
 config:
 
