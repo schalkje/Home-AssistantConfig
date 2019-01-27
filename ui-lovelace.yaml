@@ -7,7 +7,7 @@ resources:
     type: module
   - url: /local/lightslider/lightslider.js?v=0.1.1
     type: module
-  - url: /local/heat-controler/heat-controler.js?v=0.1.1
+  - url: /local/heat-controler/heat-controler.js?v=0.1.13
     type: module
 
 # custom_updater:
@@ -34,7 +34,6 @@ views:
           - switchEntity: light.eettafel
             type: custom:light-slider
           - entity: light.led_lamp_4_bureau
-views:
   - title: Heat Controler
     icon: mdi:fire
     cards: 
@@ -59,5 +58,10 @@ views:
           - entity: sensor.floor_downstairs_7_out
       - title: Downstairs heat controller
         type: custom:heat-controler
-        entity: sensor.floor_downstairs_main_in
+        input: sensor.floor_downstairs_main_in
+        output: sensor.floor_downstairs_main_out
+        zones:
+          - zonetitle: Zone 1
+          - zonetitle: Zone 2
+          - zonetitle: Zone 3
 
