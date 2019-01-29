@@ -7,11 +7,13 @@
 !*.md
 !*.js
 !*.json
+!*.png
 !yaml
 !node-red
 !mysensors
 !.cloud/lovelace
 !www/*.*
+!www/heat-controler/*.*
 
 # Ignore folders.
 .storage
