@@ -12,8 +12,8 @@
 !node-red
 !mysensors
 !.cloud/lovelace
-!www/*.*
-!www/heat-controler/*.*
+!www
+!www/heat-controler
 
 # Ignore folders.
 .storage
