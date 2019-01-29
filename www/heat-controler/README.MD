@@ -2,7 +2,7 @@
 
 ![example inactive state](heat-controler-inactive.png "inactive state")
 
-![example active state](https://schalken.duckdns..org:8123/heat-controler/heat-controler-active.png "active state")
+![example active state](heat-controler-active.png "active state")
 
 
 
