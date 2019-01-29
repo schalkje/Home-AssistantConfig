@@ -7,7 +7,7 @@ resources:
     type: module
   - url: /local/lightslider/lightslider.js?v=0.1.1
     type: module
-  - url: /local/heat-controler/heat-controler.js?v=0.1.46
+  - url: /local/heat-controler/heat-controler.js?v=0.1.61
     type: module
 
 # custom_updater:
@@ -61,7 +61,45 @@ views:
         input: sensor.floor_downstairs_main_in
         output: sensor.floor_downstairs_main_out
         zones:
-          - zone: Zone 1
-          - zone: Zone 2
-          - zone: Zone 3
+          - zone: Beneden
+            circuits:
+              - circuit: beneden 1
+                input: sensor.floor_downstairs_6_in
+                output: sensor.floor_downstairs_6_out
+                rooms: 
+                  - room: Hal 1
+                  - room: Hal 2
+                    temperature: sensor.2_temperature
+                    humidity: sensor.2_humidity
+                  - room: Washok
+              - circuit: beneden 2
+                input: sensor.floor_downstairs_7_in
+                output: sensor.floor_downstairs_7_out
+                rooms: 
+                  - room: Study
+          - zone: Woonkamer
+            rooms: 
+              - room: Woonkamer
+                temperature: sensor.3_temperature
+                humidity: sensor.3_humidity
+            circuits:
+              - circuit: living 1
+                input: sensor.floor_downstairs_1_in
+                output: sensor.floor_downstairs_1_out
+              - circuit: living 2
+                input: sensor.floor_downstairs_2_in
+                output: sensor.floor_downstairs_2_out
+              - circuit: living 3              
+                input: sensor.floor_downstairs_3_in
+                output: sensor.floor_downstairs_3_out
+          - zone: Keuken
+            rooms: 
+              - room: Keuken
+            circuits:
+              - circuit: keuken 1
+                input: sensor.floor_downstairs_4_in
+                output: sensor.floor_downstairs_4_out
+              - circuit: keuken achter
+                input: sensor.floor_downstairs_5_in
+                output: sensor.floor_downstairs_5_out          
 
