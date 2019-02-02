@@ -14,9 +14,9 @@ class HeatControler extends HTMLElement {
       const show_empty = this.config.show_empty;
 
       if (title_string) {
-        this.innerHTML = "<h1>" + title_string + "</h1>";
+        this.innerHTML = this.innerHTML + "<h1>" + title_string + "</h1>";
       } else {
-        this.innerHTML = "No title <br/>";
+        this.innerHTML = this.innerHTML + "No title <br/>";
       }
 
 
@@ -115,29 +115,6 @@ class HeatControler extends HTMLElement {
       {
         this.innerHTML = this.innerHTML + "<h2>no zones</h2>";
       }
-
-      // if (zones.count == 0) {
-      //   this.innerHTML = this.innerHTML + "<h2>zones</h2>";
-      // } else {
-      //   this.innerHTML = "No zones <br/>";
-      // }
-
-//       if (state.length != 0) {
-//         if (title_string) {
-//           this.innerHTML = title_string;
-//           // this.innerHTML = "input=" + input_state + "<br>";
-//           // this.innerHTML = "output=" + output_state + "<br>";
-//         } else {
-//           this.innerHTML = "no title";
-// //          this.innerHTML = input_state;
-//         }
-//       } else if (show_empty == true) {
-//         if (title_string) {
-//           this.innerHTML = title_string;
-//         } else {
-//           this.innerHTML = "No state, no title";
-//         }
-//       }
     }
     setConfig(config) {
       if (!config || !config.zones || !Array.isArray(config.zones)) {
@@ -180,6 +157,7 @@ class HeatControler extends HTMLElement {
 
       // // initialize zones reference      
       // this._refZones = [];
+      this.appendChild(card);
 
 
 
