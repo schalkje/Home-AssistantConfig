@@ -6,6 +6,22 @@ class HeatControler extends HTMLElement {
     
   // }
 
+  
+    getTempBox(name,value)
+    {
+      const tempBox = document.createElement('div');
+      tempBox.className = 'tempbox'
+      const tempValue = document.createElement('span');
+      const tempSymbol = document.createElement('span');
+      tempValue.innerHTML = value;
+      tempValue.className = 'tempvalue'
+      tempSymbol.innerHTML = '&deg;C';
+      tempSymbol.className = 'tempsymbol'
+      tempBox.appendChild(tempValue);
+      tempBox.appendChild(tempSymbol);
+      return tempBox;
+    }
+
     set hass(hass) {
       // get configuration
       const inputID = this.config.input;
@@ -152,6 +168,13 @@ class HeatControler extends HTMLElement {
           color: var(--primary-text-color);
         }
       `;
+
+
+
+
+      content.appendChild(this.getTempBox('input','22.5'));
+      content.appendChild(this.getTempBox('output','20.2'));
+
       card.appendChild(content);
       card.appendChild(style);
 
@@ -169,6 +192,7 @@ class HeatControler extends HTMLElement {
       }
       this.config = config;
     }
+
   
     getCardSize() {
       return 1;
