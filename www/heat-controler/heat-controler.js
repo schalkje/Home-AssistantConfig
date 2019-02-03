@@ -7,16 +7,18 @@ class HeatControler extends HTMLElement {
   // }
 
   
-    getTempBox(name,value)
+    getTempBox(name,value,style)
     {
       const tempBox = document.createElement('div');
+      tempBox.id = name;
       tempBox.className = 'tempbox'
+      tempBox.style = style;
       const tempValue = document.createElement('span');
       const tempSymbol = document.createElement('span');
       tempValue.innerHTML = value;
-      tempValue.className = 'tempvalue'
+      tempValue.className = 'tempvalue';
       tempSymbol.innerHTML = '&deg;C';
-      tempSymbol.className = 'tempsymbol'
+      tempSymbol.className = 'tempsymbol';
       tempBox.appendChild(tempValue);
       tempBox.appendChild(tempSymbol);
       return tempBox;
@@ -167,13 +169,77 @@ class HeatControler extends HTMLElement {
           line-height: calc(var(--base-unit) * 0.5);
           color: var(--primary-text-color);
         }
+
+        div.tempbox {
+          font-size: calc(var(--base-unit) * 0.5);
+          line-height: calc(var(--base-unit) * 0.5);
+          color: var(--primary-text-color);
+          padding: 2px 2px 2px 4px;
+          border: solid 1px grey;
+          background: yellow;
+
+          position: relative;
+          top: 0px;
+          left: 0;
+          width: 50px;
+          height: 20px;
+        }
+        .tempsymbol {
+          margin-left:4px;
+        }
+        .tempvalue {
+          font-size: calc(var(--base-unit) * 0.7);
+          font-weight: bold;
+        }
       `;
 
 
 
+      var top = 0;
+      var left = 0;
+      left = 0;
+      content.appendChild(this.getTempBox('input','22.5','top: '+top+'px;left: '+left+'px;'));
 
-      content.appendChild(this.getTempBox('input','22.5'));
-      content.appendChild(this.getTempBox('output','20.2'));
+      top -= 20;
+      left = 120;
+      content.appendChild(this.getTempBox('output','20.2','top: '+top+'px;left: '+left+'px;'));
+
+
+      var zone=1;
+      top = 0;
+      left = 0;
+      // left = 50*zone;
+      content.appendChild(this.getTempBox('input-z1','24.1','top: '+top+'px;left: '+left+'px;'));
+      top -= 20;
+      left = 100;
+      content.appendChild(this.getTempBox('temp-z1','19.1','top: '+top+'px;left: '+left+'px;'));
+      top -= 20;
+      left = 200;
+      content.appendChild(this.getTempBox('output-z1','20.1','top: '+top+'px;left: '+left+'px;'));
+
+      zone = zone + 1
+      top = 0;
+      left = 0;
+      content.appendChild(this.getTempBox('input-z1','24.1','top: '+top+'px;left: '+left+'px;'));
+      top -= 20;
+      left = 100;
+      content.appendChild(this.getTempBox('temp-z1','19.1','top: '+top+'px;left: '+left+'px;'));
+      top -= 20;
+      left = 200;
+      content.appendChild(this.getTempBox('output-z1','20.1','top: '+top+'px;left: '+left+'px;'));
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       card.appendChild(content);
       card.appendChild(style);

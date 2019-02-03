@@ -2,12 +2,12 @@
   - platform: group
     name: Eettafel
     entities:
-      - light.tafel1
-      - light.tafel2
+      - light.tafel_1
+      - light.tafel_2
   - platform: group
     name: Woonkamer lampen
     entities:
       - light.bollamp
-      - light.tafel1
-      - light.tafel2
+      - light.tafel_1
+      - light.tafel_2
       - light.Eettafel
