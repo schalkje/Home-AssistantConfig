@@ -1,5 +1,12 @@
 class HeatControler extends HTMLElement {
-  // constructor() {
+  constructor () {
+    super();
+
+    this._hass = null
+    this._cardElement = null
+    this._debugElement = null
+  }
+    // constructor() {
   //   super();
   //   // Make use of shadowRoot to avoid conflicts when reusing
   //   this.attachShadow({ mode: 'open' });
@@ -7,7 +14,7 @@ class HeatControler extends HTMLElement {
   // }
 
   
-    getTempBox(name,value,style)
+    RenderTemperatureBox(name,value,style)
     {
       const tempBox = document.createElement('div');
       tempBox.id = name;
@@ -24,64 +31,114 @@ class HeatControler extends HTMLElement {
       return tempBox;
     }
 
-    set hass(hass) {
-      // get configuration
+    RenderZone(zone, boxHeight)
+    {
+      var top = 0;
+      var left = 0;
+      var zone = document.createElement('div');
+      // left = 50*zone;
+      zone.appendChild(this.RenderTemperatureBox('input-z' + zone,'24.1','top: '+top+'px;left: '+left+'px;'));
+      top -= boxHeight;
+      left = 100;
+      zone.appendChild(this.RenderTemperatureBox('temp-z' + zone,'19.1','top: '+top+'px;left: '+left+'px;'));
+      top -= boxHeight;
+      left = 200;
+      zone.appendChild(this.RenderTemperatureBox('output-z' + zone,'20.1','top: '+top+'px;left: '+left+'px;'));
+
+      return zone;
+    }
+
+    RenderCircuit(circuit, boxHeight)
+    {
+      var top = 0;
+      var left = 0;
+      var circuitElement = document.createElement('div');
+      // left = 50*zone;
+      circuitElement.appendChild(this.RenderTemperatureBox('input-c' + circuit,'24.1','top: '+top+'px;left: '+left+'px;'));
+      top -= boxHeight;
+      left = 100;
+      circuitElement.appendChild(this.RenderTemperatureBox('temp-c' + circuit,'19.1','top: '+top+'px;left: '+left+'px;'));
+      top -= boxHeight;
+      left = 200;
+      circuitElement.appendChild(this.RenderTemperatureBox('output-c' + circuit,'20.1','top: '+top+'px;left: '+left+'px;'));
+
+      return circuitElement;
+    }
+
+    RenderDebug(hass)
+    {
+      // find debug element
+      if ( !this._debugElement )
+      {
+        this._debugElement = document.createElement('div');
+        //  debugElement.id = 'debug';
+        this._debugElement.className = 'debug';
+        this._cardElement.appendChild(this._debugElement);
+      }
+
+
       const inputID = this.config.input;
       const outputID = this.config.output;
       const title_string = this.config.title;
       const show_empty = this.config.show_empty;
 
+      var d = new Date();
+      var n = d.toTimeString();
+      this._debugElement.innerHTML = "<span>"+ n + "</span><br\>";
+
       if (title_string) {
-        this.innerHTML = this.innerHTML + "<h1>" + title_string + "</h1>";
+        this._debugElement.innerHTML = this._debugElement.innerHTML + "<h1>" + title_string + "</h1>";
       } else {
-        this.innerHTML = this.innerHTML + "No title <br/>";
+        this._debugElement.innerHTML = this._debugElement.innerHTML + "No title <br/>";
       }
 
 
-      this.innerHTML = this.innerHTML + "<h2>Controller</h2>";
+      this._debugElement.innerHTML = this._debugElement.innerHTML + "<h2>Controller</h2>";
       
       if (inputID)
       {
         const input_state = hass.states[inputID].state;
         // retrieve state
-        this.innerHTML = this.innerHTML + "input temperature=" + input_state + "<br/>";
+        this._debugElement.innerHTML = this._debugElement.innerHTML + "input temperature=" + input_state + "<br/>";
       }
       if (outputID)
       {
         const output_state = hass.states[outputID].state;
         // retrieve state
-        this.innerHTML = this.innerHTML + "output temperature=" + output_state + "<br/>";
+        this._debugElement.innerHTML = this._debugElement.innerHTML + "output temperature=" + output_state + "<br/>";
         }
 
-      const zonesList = this.config.zones;
+
+
+        const zonesList = this.config.zones;
       if (zonesList)
       {
-        this.innerHTML = this.innerHTML + "<h2>zones</h2>";
+        this._debugElement.innerHTML = this._debugElement.innerHTML + "<h2>zones</h2>";
         zonesList.forEach(zone => {
           if ( zone.zone)
           {
-            this.innerHTML = this.innerHTML + "<h3>zone: " + zone.zone + "</h3>";
+            this._debugElement.innerHTML = this._debugElement.innerHTML + "<h3>zone: " + zone.zone + "</h3>";
           } else {
-            this.innerHTML = this.innerHTML + "<h3>unnamed zone</h3>";
+            this._debugElement.innerHTML = this._debugElement.innerHTML + "<h3>unnamed zone</h3>";
           }
 
           const rooms = zone.rooms;
           if (rooms)
           {
             rooms.forEach(room => {
-              this.innerHTML = this.innerHTML + "<h4>room: " + room.room + "</h4>";
+              this._debugElement.innerHTML = this._debugElement.innerHTML + "<h4>room: " + room.room + "</h4>";
               if (room.temperature)
               {
-                this.innerHTML = this.innerHTML + "room temperature=<b>" + hass.states[room.temperature].state + "</b> (" +  room.temperature + ")<br/>";
+                this._debugElement.innerHTML = this._debugElement.innerHTML + "room temperature=<b>" + hass.states[room.temperature].state + "</b> (" +  room.temperature + ")<br/>";
               }
               if (room.humidity)
               {
-                this.innerHTML = this.innerHTML + "room humidity=<b>" + hass.states[room.humidity].state + "</b> (" +  room.humidity + ")<br/>";
+                this._debugElement.innerHTML = this._debugElement.innerHTML + "room humidity=<b>" + hass.states[room.humidity].state + "</b> (" +  room.humidity + ")<br/>";
               }
                 
             })
           } else {
-            this.innerHTML = this.innerHTML + "no rooms<br/>";
+            this._debugElement.innerHTML = this._debugElement.innerHTML + "no rooms<br/>";
           }
 
           const circuits = zone.circuits;
@@ -90,49 +147,56 @@ class HeatControler extends HTMLElement {
             circuits.forEach(circuit => {
               if ( circuit.circuit)
               {
-                this.innerHTML = this.innerHTML + "<h4>circuit: " + circuit.circuit + "</h4>";
+                this._debugElement.innerHTML = this._debugElement.innerHTML + "<h4>circuit: " + circuit.circuit + "</h4>";
 
                 if (circuit.input)
                 {
-                  this.innerHTML = this.innerHTML + "input temperature=<b>" + hass.states[circuit.input].state + "</b> (" +  circuit.input + ")<br/>";
+                  this._debugElement.innerHTML = this._debugElement.innerHTML + "input temperature=<b>" + hass.states[circuit.input].state + "</b> (" +  circuit.input + ")<br/>";
                 }
 
                 if (circuit.output)
                 {
-                  this.innerHTML = this.innerHTML + "output temperature=<b>" + hass.states[circuit.output].state + "</b> (" +  circuit.output + ")<br/>";
+                  this._debugElement.innerHTML = this._debugElement.innerHTML + "output temperature=<b>" + hass.states[circuit.output].state + "</b> (" +  circuit.output + ")<br/>";
                 }
                 
                 const rooms = circuit.rooms;
                 if (rooms)
                 {
                   rooms.forEach(room => {
-                    this.innerHTML = this.innerHTML + "<h5>room: " + room.room + "</h5>";
+                    this._debugElement.innerHTML = this._debugElement.innerHTML + "<h5>room: " + room.room + "</h5>";
                     if (room.temperature)
                     {
-                      this.innerHTML = this.innerHTML + "room temperature=<b>" + hass.states[room.temperature].state + "</b> (" +  room.temperature + ")<br/>";
+                      this._debugElement.innerHTML = this._debugElement.innerHTML + "room temperature=<b>" + hass.states[room.temperature].state + "</b> (" +  room.temperature + ")<br/>";
                     }
                     if (room.humidity)
                     {
-                      this.innerHTML = this.innerHTML + "room humidity=<b>" + hass.states[room.humidity].state + "</b> (" +  room.humidity + ")<br/>";
+                      this._debugElement.innerHTML = this._debugElement.innerHTML + "room humidity=<b>" + hass.states[room.humidity].state + "</b> (" +  room.humidity + ")<br/>";
                     }
                       
                   })
                 } else {
-                  this.innerHTML = this.innerHTML + "no rooms<br/>";
+                  this._debugElement.innerHTML = this._debugElement.innerHTML + "no rooms<br/>";
                 }
 
               } else {
-                this.innerHTML = this.innerHTML + "<h4>unnamed circuit</h4>";
+                this._debugElement.innerHTML = this._debugElement.innerHTML + "<h4>unnamed circuit</h4>";
               }              
             });
           } else {
-            this.innerHTML = this.innerHTML + "no circuits<br/>";
+            this._debugElement.innerHTML = this._debugElement.innerHTML + "no circuits<br/>";
           }
         });
       } else
       {
-        this.innerHTML = this.innerHTML + "<h2>no zones</h2>";
+        this._debugElement.innerHTML = this._debugElement.innerHTML + "<h2>no zones</h2>";
       }
+      
+      return true;
+    }
+
+    set hass(hass) {
+      // get configuration
+      this.RenderDebug(hass);
     }
     setConfig(config) {
       if (!config || !config.zones || !Array.isArray(config.zones)) {
@@ -194,44 +258,21 @@ class HeatControler extends HTMLElement {
       `;
 
 
-
+      var boxHeight = 26;
       var top = 0;
       var left = 0;
       left = 0;
-      content.appendChild(this.getTempBox('input','22.5','top: '+top+'px;left: '+left+'px;'));
+      content.appendChild(this.RenderTemperatureBox('input','22.5','top: '+top+'px;left: '+left+'px;'));
 
-      top -= 20;
+      top -= boxHeight;
       left = 120;
-      content.appendChild(this.getTempBox('output','20.2','top: '+top+'px;left: '+left+'px;'));
+      content.appendChild(this.RenderTemperatureBox('output','20.2','top: '+top+'px;left: '+left+'px;'));
 
 
-      var zone=1;
-      top = 0;
-      left = 0;
-      // left = 50*zone;
-      content.appendChild(this.getTempBox('input-z1','24.1','top: '+top+'px;left: '+left+'px;'));
-      top -= 20;
-      left = 100;
-      content.appendChild(this.getTempBox('temp-z1','19.1','top: '+top+'px;left: '+left+'px;'));
-      top -= 20;
-      left = 200;
-      content.appendChild(this.getTempBox('output-z1','20.1','top: '+top+'px;left: '+left+'px;'));
-
-      zone = zone + 1
-      top = 0;
-      left = 0;
-      content.appendChild(this.getTempBox('input-z1','24.1','top: '+top+'px;left: '+left+'px;'));
-      top -= 20;
-      left = 100;
-      content.appendChild(this.getTempBox('temp-z1','19.1','top: '+top+'px;left: '+left+'px;'));
-      top -= 20;
-      left = 200;
-      content.appendChild(this.getTempBox('output-z1','20.1','top: '+top+'px;left: '+left+'px;'));
-
-
-
-
-
+      var zone=0;
+      var circuit=0;
+      content.appendChild(this.RenderCircuit(++circuit, boxHeight));
+      content.appendChild(this.RenderCircuit(++circuit, boxHeight));
 
 
 
@@ -247,8 +288,7 @@ class HeatControler extends HTMLElement {
       // // initialize zones reference      
       // this._refZones = [];
       this.appendChild(card);
-
-
+      this._cardElement = card;
 
       // if (!config.entity) {
       //   throw new Error('You need to define an entity');
@@ -257,6 +297,8 @@ class HeatControler extends HTMLElement {
         config.show_empty = false;
       }
       this.config = config;
+
+
     }
 
   
