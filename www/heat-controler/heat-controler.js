@@ -4,7 +4,9 @@ class HeatControler extends HTMLElement {
 
     this._hass = null
     this._cardElement = null
+    this._controlerElement = null;
     this._debugElement = null
+    this._boxHeight = 26;
   }
     // constructor() {
   //   super();
@@ -31,38 +33,247 @@ class HeatControler extends HTMLElement {
       return tempBox;
     }
 
-    RenderZone(zone, boxHeight)
+    RenderLabel(text, className)
+    {
+      const labelElement = document.createElement('span');
+      labelElement.className = className;
+
+      labelElement.innerHTML = "" + text + "";
+
+      return labelElement;
+    }
+
+    RenderZone(zone)
     {
       var top = 0;
       var left = 0;
-      var zone = document.createElement('div');
+      var zoneElement = document.createElement('div');
       // left = 50*zone;
-      zone.appendChild(this.RenderTemperatureBox('input-z' + zone,'24.1','top: '+top+'px;left: '+left+'px;'));
-      top -= boxHeight;
-      left = 100;
-      zone.appendChild(this.RenderTemperatureBox('temp-z' + zone,'19.1','top: '+top+'px;left: '+left+'px;'));
-      top -= boxHeight;
-      left = 200;
-      zone.appendChild(this.RenderTemperatureBox('output-z' + zone,'20.1','top: '+top+'px;left: '+left+'px;'));
 
-      return zone;
+      // this._debugElement.innerHTML = this._debugElement.innerHTML + "<h2>zones</h2>";
+      if ( zone.zone )
+      {
+        zoneElement.appendChild(this.RenderLabel(zone.zone,'zone'));
+      } else {
+        zoneElement.appendChild(this.RenderLabel('unnamed zone','zone'));
+      }
+
+      const rooms = zone.rooms;
+      if (rooms)
+      {
+        rooms.forEach(room => {
+          zoneElement.appendChild(this.RenderLabel(room.room,'room'));
+
+          // this._debugElement.innerHTML = this._debugElement.innerHTML + "<h4>room: " + room.room + "</h4>";
+          // if (room.temperature)
+          // {
+          //   this._debugElement.innerHTML = this._debugElement.innerHTML + "room temperature=<b>" + hass.states[room.temperature].state + "</b> (" +  room.temperature + ")<br/>";
+          // }
+          // if (room.humidity)
+          // {
+          //   this._debugElement.innerHTML = this._debugElement.innerHTML + "room humidity=<b>" + hass.states[room.humidity].state + "</b> (" +  room.humidity + ")<br/>";
+          // }
+            
+        })
+      } else {
+        zoneElement.appendChild(this.RenderLabel('no rooms','room'));
+      }
+
+      const circuits = zone.circuits;
+      if (circuits)
+      {
+        circuits.forEach(circuit => {
+          zoneElement.appendChild(this.RenderCircuit(circuit));
+        });
+      } else {
+        zoneElement.appendChild(this.RenderLabel('no circuits','nodata'));
+      }
+
+
+      return zoneElement;
     }
 
-    RenderCircuit(circuit, boxHeight)
+    RenderMainCircuit(input_id, output_id, boxHeight)
     {
       var top = 0;
       var left = 0;
       var circuitElement = document.createElement('div');
+
+      // get input temperature
+      var input_state = '--.-'; // default value
+      if (input_id && this._hass && this._hass.states[input_id])
+      {
+        input_state = this._hass.states[input_id].state;
+      }
+
+      // get output temperature
+      var output_state = '--.-'; // default value
+      if (output_id && this._hass && this._hass.states[output_id])
+      {
+        output_state = this._hass.states[output_id].state;
+      }
+
+
       // left = 50*zone;
-      circuitElement.appendChild(this.RenderTemperatureBox('input-c' + circuit,'24.1','top: '+top+'px;left: '+left+'px;'));
-      top -= boxHeight;
-      left = 100;
-      circuitElement.appendChild(this.RenderTemperatureBox('temp-c' + circuit,'19.1','top: '+top+'px;left: '+left+'px;'));
+      circuitElement.appendChild(this.RenderTemperatureBox('input',input_state,'top: '+top+'px;left: '+left+'px;'));
       top -= boxHeight;
       left = 200;
-      circuitElement.appendChild(this.RenderTemperatureBox('output-c' + circuit,'20.1','top: '+top+'px;left: '+left+'px;'));
+      circuitElement.appendChild(this.RenderTemperatureBox('output',output_state,'top: '+top+'px;left: '+left+'px;'));
 
       return circuitElement;
+    }
+
+    RenderCircuit(circuit)
+    {
+      var top = 0;
+      var left = 0;
+      const circuitElement = document.createElement('div');
+
+      if ( circuit.circuit)
+      {
+        circuitElement.appendChild(this.RenderLabel(circuit.circuit,'circuit'));
+
+        // get input temperature
+        var input_state = '--.-'; // default value
+        if (circuit.input && this._hass && this._hass.states[circuit.input])
+        {
+          input_state = this._hass.states[circuit.input].state;
+        }
+
+        // get output temperature
+        var output_state = '--.-'; // default value
+        if (circuit.output && this._hass && this._hass.states[circuit.output])
+        {
+          output_state = this._hass.states[circuit.output].state;
+        }
+
+        
+        circuitElement.appendChild(this.RenderTemperatureBox('input-c' + circuit.circuit,input_state,'top: '+top+'px;left: '+left+'px;'));
+        top -= this._boxHeight;
+        left = 200;
+        circuitElement.appendChild(this.RenderTemperatureBox('output-c' + circuit.circuit,output_state,'top: '+top+'px;left: '+left+'px;'));
+        top -= this._boxHeight;        
+
+        const rooms = circuit.rooms;
+        if (rooms)
+        {
+          rooms.forEach(room => {
+            circuitElement.appendChild(this.RenderLabel(room.room,'room'));
+
+            // get circuit room temperature
+            var temperature_state = '--.-'; // default value
+            if (room.temperature && this._hass && this._hass.states[room.temperature] )
+            {
+              temperature_state = this._hass.states[room.temperature].state;
+            }
+
+            if (room.temperature)
+            {
+              left = 100;
+              circuitElement.appendChild(this.RenderTemperatureBox('temp-c' + circuit.circuit,temperature_state,'top: '+top+'px;left: '+left+'px;'));
+              // top -= this._boxHeight;
+            }
+
+            // get circuit room temperature
+            var humidity_state = '--.-'; // default value
+            if (room.humidity && this._hass && this._hass.states[room.humidity] )
+            {
+              humidity_state = this._hass.states[room.humidity].state;
+            }
+                        
+            if (room.humidity)
+            {
+              left = 100;
+              // circuitElement.appendChild(this.RenderTemperatureBox('temp-c' + circuit.circuit,humidity_state,'top: '+top+'px;left: '+left+'px;'));
+              // top -= this._boxHeight;
+            }
+          })
+        } 
+      } else {
+        circuitElement.appendChild(this.RenderLabel('unnamed circuit','no data'))
+      } 
+
+      return circuitElement;
+    }
+
+    RenderCircuit2(circuit, boxHeight)
+    {
+      var top = 0;
+      var left = 0;
+      var circuitElement = document.createElement('div');
+      
+      // get input temperature
+      var input_state = '--.-'; // default value
+      if (input_id && this._hass && this._hass.states[input_id])
+      {
+        input_state = this._hass.states[input_id].state;
+      }
+
+      // get output temperature
+      var output_state = '--.-'; // default value
+      if (output_id && this._hass && this._hass.states[output_id])
+      {
+        output_state = this._hass.states[output_id].state;
+      }
+
+      // get circuit room temperature
+      var temperature_state = '--.-'; // default value
+      if (temperature_id && this._hass && this._hass.states[temperature_id])
+      {
+        temperature_state = this._hass.states[temperature_id].state;
+      }
+
+      // left = 50*zone;
+      circuitElement.appendChild(this.RenderTemperatureBox('input-c' + circuit,input_state,'top: '+top+'px;left: '+left+'px;'));
+      top -= boxHeight;
+      left = 100;
+      circuitElement.appendChild(this.RenderTemperatureBox('temp-c' + circuit,temperature_state,'top: '+top+'px;left: '+left+'px;'));
+      top -= boxHeight;
+      left = 200;
+      circuitElement.appendChild(this.RenderTemperatureBox('output-c' + circuit,output_state,'top: '+top+'px;left: '+left+'px;'));
+
+      return circuitElement;
+    }
+
+    RenderError(errorText)
+    {
+      const errorElement = document.createElement('div');
+      errorElement.innerHTML = "<span style='color:red;'>" + errorText + "</span><br\>";
+
+      return errorElement;
+    }
+
+    RenderControler()
+    {
+      var d = new Date();
+      var n = d.toTimeString();
+      this._controlerElement.innerHTML = "Controler <span style='color:red;'>"+ n + "</span><br\>";
+
+      if (!this.config) 
+      {
+        this._controlerElement.appendChild(this.RenderError("No config"));
+        return;
+      }
+
+      const inputID = this.config.input;
+      const outputID = this.config.output;
+      const show_empty = this.config.show_empty;
+
+      this._controlerElement.appendChild(this.RenderMainCircuit(this.config.input, this.config.output, 28));
+
+      const zonesList = this.config.zones;
+      if (zonesList)
+      {
+        zonesList.forEach(zone => {
+          this._controlerElement.appendChild(this.RenderZone(zone));
+        });
+      } 
+      else 
+      {
+        this._controlerElement.appendChild(this.RenderError("No zones"));
+      }
+      
+      return true;
     }
 
     RenderDebug(hass)
@@ -195,8 +406,11 @@ class HeatControler extends HTMLElement {
     }
 
     set hass(hass) {
+      this._hass = hass;
+
+      this.RenderControler();
       // get configuration
-      this.RenderDebug(hass);
+      // this.RenderDebug(hass);
     }
     setConfig(config) {
       if (!config || !config.zones || !Array.isArray(config.zones)) {
@@ -258,30 +472,32 @@ class HeatControler extends HTMLElement {
       `;
 
 
-      var boxHeight = 26;
-      var top = 0;
-      var left = 0;
-      left = 0;
-      content.appendChild(this.RenderTemperatureBox('input','22.5','top: '+top+'px;left: '+left+'px;'));
+      // var boxHeight = 26;
+      // var top = 0;
+      // var left = 0;
+      // left = 0;
+      // content.appendChild(this.RenderTemperatureBox('input','22.5','top: '+top+'px;left: '+left+'px;'));
 
-      top -= boxHeight;
-      left = 120;
-      content.appendChild(this.RenderTemperatureBox('output','20.2','top: '+top+'px;left: '+left+'px;'));
-
-
-      var zone=0;
-      var circuit=0;
-      content.appendChild(this.RenderCircuit(++circuit, boxHeight));
-      content.appendChild(this.RenderCircuit(++circuit, boxHeight));
+      // top -= boxHeight;
+      // left = 120;
+      // content.appendChild(this.RenderTemperatureBox('output','20.2','top: '+top+'px;left: '+left+'px;'));
 
 
+      // var zone=0;
+      // var circuit=0;
+      // content.appendChild(this.RenderCircuit(++circuit, boxHeight));
+      // content.appendChild(this.RenderCircuit(++circuit, boxHeight));
 
 
 
 
+      this._controlerElement = document.createElement('div');
+      this._controlerElement.innerHTML = 'Test';
+      
 
 
 
+      card.appendChild(this._controlerElement);
       card.appendChild(content);
       card.appendChild(style);
 
