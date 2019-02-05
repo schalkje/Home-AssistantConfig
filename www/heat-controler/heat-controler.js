@@ -7,6 +7,7 @@ class HeatControler extends HTMLElement {
     this._controlerElement = null;
     this._debugElement = null
     this._boxHeight = 26;
+    this._defaultUnknownTemp = '__._'
   }
     // constructor() {
   //   super();
@@ -64,15 +65,33 @@ class HeatControler extends HTMLElement {
         rooms.forEach(room => {
           zoneElement.appendChild(this.RenderLabel(room.room,'room'));
 
-          // this._debugElement.innerHTML = this._debugElement.innerHTML + "<h4>room: " + room.room + "</h4>";
-          // if (room.temperature)
-          // {
-          //   this._debugElement.innerHTML = this._debugElement.innerHTML + "room temperature=<b>" + hass.states[room.temperature].state + "</b> (" +  room.temperature + ")<br/>";
-          // }
-          // if (room.humidity)
-          // {
-          //   this._debugElement.innerHTML = this._debugElement.innerHTML + "room humidity=<b>" + hass.states[room.humidity].state + "</b> (" +  room.humidity + ")<br/>";
-          // }
+           // get circuit room temperature
+           var temperature_state = '--.-'; // default value
+           if (room.temperature && this._hass && this._hass.states[room.temperature] )
+           {
+             temperature_state = this._hass.states[room.temperature].state;
+           }
+
+           if (room.temperature)
+           {
+             left = 100;
+             zoneElement.appendChild(this.RenderTemperatureBox('temp-r' + room.room,temperature_state,'top: '+top+'px;left: '+left+'px;'));
+             // top -= this._boxHeight;
+           }
+
+           // get circuit room temperature
+           var humidity_state = '--.-'; // default value
+           if (room.humidity && this._hass && this._hass.states[room.humidity] )
+           {
+             humidity_state = this._hass.states[room.humidity].state;
+           }
+                       
+           if (room.humidity)
+           {
+             left = 100;
+             // zoneElement.appendChild(this.RenderTemperatureBox('temp-h' + room.room,humidity_state,'top: '+top+'px;left: '+left+'px;'));
+             // top -= this._boxHeight;
+           }
             
         })
       } else {
@@ -104,13 +123,15 @@ class HeatControler extends HTMLElement {
       if (input_id && this._hass && this._hass.states[input_id])
       {
         input_state = this._hass.states[input_id].state;
+        if (input_state == 'unknown') input_state = this._defaultUnknownTemp; // default value when unknown state
       }
 
       // get output temperature
-      var output_state = '--.-'; // default value
+      var output_state = this._defaultUnknownTemp; // default value
       if (output_id && this._hass && this._hass.states[output_id])
       {
         output_state = this._hass.states[output_id].state;
+        if (output_state == 'unknown') output_state = this._defaultUnknownTemp; // default value when unknown state
       }
 
 
@@ -138,6 +159,8 @@ class HeatControler extends HTMLElement {
         if (circuit.input && this._hass && this._hass.states[circuit.input])
         {
           input_state = this._hass.states[circuit.input].state;
+          if (input_state == 'unknown') input_state = this._defaultUnknownTemp; // default value when unknown state
+
         }
 
         // get output temperature
@@ -145,6 +168,7 @@ class HeatControler extends HTMLElement {
         if (circuit.output && this._hass && this._hass.states[circuit.output])
         {
           output_state = this._hass.states[circuit.output].state;
+          if (output_state == 'unknown') output_state = this._defaultUnknownTemp; // default value when unknown state
         }
 
         
@@ -207,6 +231,8 @@ class HeatControler extends HTMLElement {
       if (input_id && this._hass && this._hass.states[input_id])
       {
         input_state = this._hass.states[input_id].state;
+        if (input_state == 'unknown') input_state = this._defaultUnknownTemp; // default value when unknown state
+
       }
 
       // get output temperature
@@ -214,6 +240,7 @@ class HeatControler extends HTMLElement {
       if (output_id && this._hass && this._hass.states[output_id])
       {
         output_state = this._hass.states[output_id].state;
+        if (output_state == 'unknown') output_state = this._defaultUnknownTemp; // default value when unknown state
       }
 
       // get circuit room temperature
