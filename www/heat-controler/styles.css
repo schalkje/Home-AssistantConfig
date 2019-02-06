@@ -1,0 +1,43 @@
+#title {
+  font-size: calc(var(--base-unit) * 0.5);
+  line-height: calc(var(--base-unit) * 0.5);
+  color: var(--primary-text-color);
+}
+
+div.tempbox {
+  font-size: calc(var(--base-unit) * 0.5);
+  line-height: calc(var(--base-unit) * 0.5);
+  color: var(--primary-text-color);
+  padding: 2px 2px 2px 4px;
+  border: solid 1px grey;
+  background: rgba(255, 255, 147, 0.589);
+
+  position: relative;
+  top: 0px;
+  left: 0px;
+  width: 50px;
+  height: 20px;
+}
+
+.tempsymbol {
+  margin-left: 4px;
+}
+
+.tempvalue {
+  font-size: calc(var(--base-unit) * 0.7);
+  font-weight: bold;
+}
+
+div.room {
+  position: relative;
+
+  top: 0px;
+  left: 54px;
+  width: 142px;
+
+  padding: 2px 2px 2px 2px;
+
+  text-align: center;
+  color: blue;
+  border: solid 1px red;
+}

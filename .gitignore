@@ -8,6 +8,8 @@
 !*.js
 !*.json
 !*.png
+!*.html
+!*.css
 !yaml
 !node-red
 !mysensors
