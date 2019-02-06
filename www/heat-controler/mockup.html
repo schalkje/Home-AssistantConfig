@@ -8,17 +8,24 @@
 
 <body>
   <heat-controler>
-    <div id="title" class="header" style="font-family: var(--paper-font-headline_-_font-family); -webkit-font-smoothing: var(--paper-font-headline_-_-webkit-font-smoothing); font-size: var(--paper-font-headline_-_font-size); font-weight: var(--paper-font-headline_-_font-weight); letter-spacing: var(--paper-font-headline_-_letter-spacing); line-height: var(--paper-font-headline_-_line-height); text-rendering: var(--paper-font-common-expensive-kerning_-_text-rendering); opacity: var(--dark-primary-opacity); padding: 24px 16px 0px;">Downstairs
-      heat controller</div>
-    <div>Controler <span style="color:red;">22:25:20 GMT+0100 (Midden-Europese standaardtijd)</span><br>
-      <div>
-        <div id="input" class="tempbox" style="top: 0px; left: 0px;"><span class="tempvalue">23.3</span><span class="tempsymbol">°C</span></div>
-        <div id="output" class="tempbox" style="top: -28px; left: 200px;"><span class="tempvalue">27.8</span><span
+    <div id="controler" class="debugoutline0">
+      <div id="title" class="header debugoutline">Downstairs
+        heat controller</div>
+      <!-- to do float refresh time somewhere -->
+      <div class="refreshtime debugoutline">22:25:20 GMT+0100 (Midden-Europese standaardtijd)</div>
+
+      <div id="inputline" class="debugoutline">
+        <div id="input" class="inline_tempbox" style="top: 0px; left: 0px;"><span class="tempvalue">23.3</span><span
             class="tempsymbol">°C</span></div>
       </div>
-      <div>
-        <div class="zone">Beneden</div>
-        <div class="room">no rooms</div>
+      <div id="outputline" class="debugoutline">
+        <div id="output" class="inline_tempbox" style="top: -28px; left: 200px;"><span class="tempvalue">27.8</span><span
+            class="tempsymbol">°C</span></div>
+      </div>
+
+      <div class="zone debugoutline">
+        <div class="zonelabel debugoutline">Beneden</div>
+        <div class="zoneroom">no rooms</div>
         <div>
           <div class="circuit">beneden 1</div>
           <div id="input-cbeneden 1" class="tempbox" style="top: 0px; left: 0px;"><span class="tempvalue">29.0</span><span
@@ -42,7 +49,7 @@
           <div class="room" style="top: -52px;">Study</div>
         </div>
       </div>
-      <div>
+      <div id="zone" class="debugoutline">
         <div class="zone">Woonkamer</div>
         <div class="room">Woonkamer</div>
         <div id="temp-rWoonkamer" class="tempbox" style="top: 0px; left: 100px;"><span class="tempvalue">19.9</span><span
@@ -69,7 +76,7 @@
               class="tempsymbol">°C</span></div>
         </div>
       </div>
-      <div>
+      <div id="zone" class="debugoutline">
         <div class="zone">Keuken</div>
         <div class="room">Keuken</div>
         <div>

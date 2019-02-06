@@ -17,22 +17,83 @@
 #controler {
   position: absolute;
   left: 100px;
-  width: 400px;
+  width: 500px;
 }
 
-div.tempbox {
-  font-size: calc(var(--base-unit) * 0.5);
-  line-height: calc(var(--base-unit) * 0.5);
-  color: var(--primary-text-color);
-  padding: 2px 2px 2px 4px;
-  border: solid 1px grey;
-  background: rgba(255, 255, 147, 0.589);
+table{
+  font-size: 9pt;  /* calc(var(--base-unit) * 0.2); */
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
 
-  position: relative;
-  top: 0px;
-  left: 0px;
-  width: 50px;
-  height: 20px;
+td 
+{
+ /* background: lightyellow; */
+ /* border: solid 1px lightskyblue; */
+ padding: 4px;
+ align-content: center;
+
+}
+
+tr.zone:nth-child(even) {
+  background-color: rgb(235, 232, 253);
+  border: solid 1px lightskyblue;
+}
+tr.zone:nth-child(odd) {
+  background-color: #eee;
+  border: solid 1px rgb(202, 232, 250);
+}
+
+tr {
+  border: solid 1px lightskyblue;
+}
+tr.circuit
+{
+  background: rgba(241, 255, 241, 0.56);
+  border: solid 1px red;
+}
+
+td.circuitlabel
+{
+  width: 100px;
+}
+td.zonelabel
+{
+  width: 20px;
+  max-width: 20px;
+}
+
+td.circuit
+{
+  width: 100px;
+}
+
+td.input
+{
+  width: 60px;max-width: 60px;
+}
+
+td.output
+{
+  width: 60px;
+}
+
+td.rooms
+{
+  width: 100px;
+  max-width: 100px;
+  /* border: solid 1px rgb(135, 250, 169); */
+}
+
+td.rooms table{
+  width: 100%;
+}
+
+td.room
+{
+  text-align: center;
+  width: 100%;
+  border: solid 1px lightgray;
+  background: white;
 }
 
 .tempsymbol {
@@ -55,7 +116,7 @@ div.room {
 
   text-align: center;
   color: blue;
-  border: solid 1px lightblue;
+  /* border: solid 1px lightblue; */
 }
 
 
@@ -71,7 +132,7 @@ div.zoneroom {
   padding: 2px 2px 2px 2px;
 
   color: blue;
-  border: solid 1px lightblue;
+  /* border: solid 1px lightblue; */
 }
 
 div.inline_tempbox {
@@ -84,7 +145,7 @@ div.inline_tempbox {
   border: solid 1px grey;
   background: rgba(255, 255, 147, 0.589);
 
-
+  margin: 0 auto;
 
   width: 50px;
   height: 20px;
@@ -119,27 +180,28 @@ div.zone
 
 div.zonelabel
 {
-  position: absolute;
-  left: -140pt;
-  top: 50%;
-  width: 100%;
+  position: relative;
+  
+  top: -50%;
+  width: 100%; 
+  height: 0%;
   text-align: center;
 
   color:grey;
-  font-size: 18pt;  /* calc(var(--base-unit) * 0.2); */
+  font-size: 10pt;  /* calc(var(--base-unit) * 0.2); */
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 
   /* Safari */
--webkit-transform: rotate(-90deg);
+-webkit-transform: rotate(90deg);
 
 /* Firefox */
--moz-transform: rotate(-90deg);
+-moz-transform: rotate(90deg);
 
 /* IE */
--ms-transform: rotate(-90deg);
+-ms-transform: rotate(90deg);
 
 /* Opera */
--o-transform: rotate(-90deg);
+-o-transform: rotate(90deg);
 }
 
 div.refreshtime

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="styles_table.css">
+    <title>Page Title</title>
+</head>
+
+<body>
+    <heat-controler>
+        <div id="controler" class="debugoutline0">
+            <div id="title" class="header debugoutline">Downstairs
+                heat controller</div>
+            <!-- to do float refresh time somewhere -->
+            <div class="refreshtime debugoutline">22:25:20 GMT+0100 (Midden-Europese standaardtijd)</div>
+
+
+            <table class="zones" style="width:100%">
+                <!-- controler line -->
+                <tr class="zone">
+                    <td class="content">
+                        <table class="circuits">
+                            <tr class="maincircuit">
+                                <td class="circuitlabel">
+                                    controler
+                                </td>
+                                <td>
+                                    <table class="zone">
+                                        <tr>
+                                            <td class="input">
+                                                <div id="input" class="inline_tempbox" style="top: 0px; left: 0px;"><span
+                                                        class="tempvalue">23.3</span><span class="tempsymbol">°C</span></div>
+                                            </td>
+                                            <td class="rooms"/>
+                                            <td class="output">
+                                                <div id="output" class="inline_tempbox" style="top: -28px; left: 200px;"><span
+                                                        class="tempvalue">27.8</span><span class="tempsymbol">°C</span></div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td class="zonelabel"/>
+                </tr>
+                <!-- BENEDEN -->
+                <tr class="zone">
+                    <td class="content">
+                        <table class="circuits">
+                            <tr class="circuit">
+                                <td class="circuitlabel">
+                                    Beneden 1
+                                </td>
+                                <td>
+                                    <table class="zone">
+                                        <tr>
+                                            <td class="input">
+                                                <div id="input-cbeneden 1" class="inline_tempbox" style="top: 0px; left: 0px;"><span
+                                                        class="tempvalue">29.0</span><span class="tempsymbol">°C</span></div>
+                                            </td>
+                                            <td class="rooms">
+                                                <table class="rooms">
+                                                    <tr>
+                                                        <td class="room">Hal 1
+
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                          
+                                                        <td class="room">Hal 2<div id="temp-cbeneden1" class="inline_tempbox" ><span class="tempvalue">19.7</span><span class="tempsymbol">°C</span></div>
+                                                            <div id="temp-cbeneden2" class="inline_tempbox" ><span class="tempvalue">51.8</span><span class="tempsymbol">%</span></div>
+
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="room">Washok
+
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td class="output">
+                                                <div id="output-cbeneden 1" class="inline_tempbox" style="top: -26px; left: 200px;"><span
+                                                        class="tempvalue">22.0</span><span class="tempsymbol">°C</span></div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            <tr class="circuit">
+                                <td class="circuitlabel">
+                                    Beneden 2
+                                </td>
+                                <td>
+                                    <table class="zone">
+                                        <tr>
+                                            <td class="input">
+                                                <div id="input-cbeneden 2" class="inline_tempbox" style="top: 0px; left: 0px;"><span
+                                                        class="tempvalue">__._</span><span class="tempsymbol">°C</span></div>
+                                            </td>
+                                            <td class="rooms">
+                                                <table class="rooms">
+                                                    <tr>
+                                                        <td class="room">Study</td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td class="output">
+                                                <div id="output-cbeneden 2" class="inline_tempbox" style="top: -26px; left: 200px;"><span
+                                                        class="tempvalue">21.6</span><span class="tempsymbol">°C</span></div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                </tr>
+            </table>
+            </td>
+            <td class="zonelabel">
+                <div class="zonelabel debugoutline">Beneden</div>
+            </td>
+            </tr>
+            <!-- WOONKAMER -->
+            <tr class="zone">
+                <td class="content">
+                    <table class="circuits">
+                        <tr class="room">
+                            <td class="circuitlabel">
+
+                            </td>
+                            <td>
+                                <table class="zonerooms">
+                                    <tr>
+                                        <td class="input" />
+                                        <td class="rooms">
+                                            <table class="rooms">
+                                                <tr>
+                                                    <td  class="room">Woonkamer
+                                                        <div id="temp-cbeneden 1" class="inline_tempbox" style="top: -52px; left: 100px;"><span
+                                                                class="tempvalue">19.7</span><span class="tempsymbol">°C</span></div>
+                                                        <div id="temp-cbeneden 1" class="inline_tempbox" style="top: -52px; left: 100px;"><span
+                                                                class="tempvalue">51.8</span><span class="tempsymbol">%</span></div>
+
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td class="output" />
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr class="circuit">
+                            <td class="circuitlabel">
+                                Woonkamer 1
+                            </td>
+                            <td>
+                                <table class="zone">
+                                    <tr>
+                                        <td class="input">
+                                            <div id="input-cbeneden 1" class="inline_tempbox" style="top: 0px; left: 0px;"><span
+                                                    class="tempvalue">29.0</span><span class="tempsymbol">°C</span></div>
+                                        </td>
+                                        <td class="rooms">
+                                            <table class="rooms">
+                                                <tr>
+                                                    <td/>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td class="output">
+                                            <div id="output-cbeneden 1" class="inline_tempbox" style="top: -26px; left: 200px;"><span
+                                                    class="tempvalue">22.0</span><span class="tempsymbol">°C</span></div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr class="circuit">
+                            <td class="circuitlabel">
+                                Woonkamer 2
+                            </td>
+                            <td>
+                                <table class="zone">
+                                    <tr>
+                                        <td class="input">
+                                            <div id="input-cbeneden 2" class="inline_tempbox" style="top: 0px; left: 0px;"><span
+                                                    class="tempvalue">__._</span><span class="tempsymbol">°C</span></div>
+                                        </td>
+                                        <td class="rooms">
+                                            <table class="rooms">
+                                                <tr>
+                                                    <td/>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td class="output">
+                                            <div id="output-cbeneden 2" class="inline_tempbox" style="top: -26px; left: 200px;"><span
+                                                    class="tempvalue">21.6</span><span class="tempsymbol">°C</span></div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr class="circuit">
+                            <td class="circuitlabel">
+                                Woonkamer 3
+                            </td>
+                            <td>
+                                <table class="zone">
+                                    <tr>
+                                        <td class="input">
+                                            <div id="input-cbeneden 2" class="inline_tempbox" style="top: 0px; left: 0px;"><span
+                                                    class="tempvalue">__._</span><span class="tempsymbol">°C</span></div>
+                                        </td>
+                                        <td class="rooms">
+                                            <table class="rooms">
+                                                <tr>
+                                                    <td/>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td class="output">
+                                            <div id="output-cbeneden 2" class="inline_tempbox" style="top: -26px; left: 200px;"><span
+                                                    class="tempvalue">21.6</span><span class="tempsymbol">°C</span></div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td class="zonelabel">
+                    <div class="zonelabel debugoutline">Woonkamer</div>
+                </td>
+            </tr>
+            <!-- KEUKEN -->
+            <tr class="zone">
+                <td class="content">
+                    <table class="circuits">
+                        <tr class="room">
+                            <td class="zonename">
+
+                            </td>
+                            <td>
+                                <table class="zonerooms">
+                                    <tr>
+                                        <td class="input" />
+                                        <td class="rooms">
+                                            <table class="rooms">
+                                                <tr>
+                                                    <td class="room">Keuken
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td class="output"></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr class="circuit">
+                            <td class="circuitlabel">
+                                Keuken 1
+                            </td>
+                            <td>
+                                <table class="zone">
+                                    <tr>
+                                        <td class="input">
+                                            <div id="input-ckeuken 1" class="inline_tempbox" style="top: 0px; left: 0px;"><span
+                                                    class="tempvalue">31.1</span><span class="tempsymbol">°C</span></div>
+                                        </td>
+                                        <td class="rooms"/>
+                                        <td class="output">
+                                            <div id="output-ckeuken 1" class="inline_tempbox" style="top: -26px; left: 200px;"><span
+                                                    class="tempvalue">23.1</span><span class="tempsymbol">°C</span></div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr class="circuit">
+                            <td class="circuitlabel">
+                                Keuken 2
+                            </td>
+                            <td>
+                                <table class="zone">
+                                    <tr>
+                                        <td class="input">
+                                            <div id="input-ckeuken achter" class="inline_tempbox" style="top: 0px; left: 0px;"><span
+                                                    class="tempvalue">31.3</span><span class="tempsymbol">°C</span></div>
+                                        </td>
+                                        <td class="rooms"/>
+                                        <td class="output">
+                                            <div id="output-ckeuken achter" class="inline_tempbox" style="top: -26px; left: 200px;"><span
+                                                    class="tempvalue">23.8</span><span class="tempsymbol">°C</span></div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                    </table>
+                </td>
+                <td class="zonelabel">
+                    <div class="zonelabel debugoutline">Keuken</div>
+                </td>
+            </tr>
+            </table>
+
+
+        <div id="value"></div>
+    </heat-controler>
+</body>
+
+</html>
