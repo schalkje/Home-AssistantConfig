@@ -1027,8 +1027,8 @@
      "view-show-grid": true
     }
    },
-   "menu-deploymenu-item-flow": false,
-   "menu-deploymenu-item-full": true,
+   "menu-deploymenu-item-flow": true,
+   "menu-deploymenu-item-full": false,
    "menu-menu-item-sidebar": true
   }
  }

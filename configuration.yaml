@@ -85,7 +85,7 @@ logbook:
 # Enables a map showing the location of tracked devices
 map:
 
-# Pick any icon that you can find on materialdesignicons.com and prefix the name with mdi:
+# Pick any icon that you can find on http://materialdesignicons.com/ and prefix the name with mdi:
 zone:
   - name: Home
     latitude: !secret home_latitude
@@ -123,6 +123,7 @@ weather 2:
 
 sensor: !include yaml/sensors.yaml
 switch: !include yaml/switches.yaml
+input_boolean: !include yaml/input_booleans.yaml
 
 # https://www.home-assistant.io/components/alarm_control_panel.manual/
 alarm_control_panel:
