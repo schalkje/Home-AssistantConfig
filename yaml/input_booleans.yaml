@@ -23,7 +23,7 @@
     initial: off
     icon: mdi:cursor-move
   livingroom_mode_night:
-    name: Set the lights for early evening (living room)
+    name: Set the lights for night strolling (living room)
     initial: off
     icon: mdi:weather-night
   livingroom_mode_evening:

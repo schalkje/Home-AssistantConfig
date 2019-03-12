@@ -117,3 +117,12 @@ views:
           - entity: input_boolean.nobody_home
           - entity: input_boolean.automatic_day_start
           - entity: input_boolean.evening_movement_triggered
+      - type: entities
+        title: States 
+        show_header_toggle: false         
+        entities:
+          - entity: input_boolean.livingroom_mode_morning
+          - entity: input_boolean.livingroom_mode_evening
+          - entity: input_boolean.livingroom_mode_tv
+          - entity: input_boolean.livingroom_mode_boardgame
+          - entity: input_boolean.livingroom_mode_night
