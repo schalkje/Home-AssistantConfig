@@ -126,3 +126,4 @@ views:
           - entity: input_boolean.livingroom_mode_tv
           - entity: input_boolean.livingroom_mode_boardgame
           - entity: input_boolean.livingroom_mode_night
+          - entity: input_boolean.livingroom_mode_night_off

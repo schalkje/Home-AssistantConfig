@@ -26,6 +26,10 @@
     name: Set the lights for night strolling (living room)
     initial: off
     icon: mdi:weather-night
+  livingroom_mode_night_off:
+    name: Set the lights for night strolling off
+    initial: off
+    icon: mdi:weather-night
   livingroom_mode_evening:
     name: Set the lights for early evening (living room)
     initial: off
