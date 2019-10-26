@@ -1,0 +1,160 @@
+#title {
+  font-size: calc(var(--base-unit) * 0.5);
+  line-height: calc(var(--base-unit) * 0.5);
+  font-family: var(--paper-font-headline_-_font-family); 
+  -webkit-font-smoothing: var(--paper-font-headline_-_-webkit-font-smoothing); 
+  font-size: var(--paper-font-headline_-_font-size);
+  font-weight: var(--paper-font-headline_-_font-weight); 
+  letter-spacing: var(--paper-font-headline_-_letter-spacing); 
+  line-height: var(--paper-font-headline_-_line-height); 
+  text-rendering: var(--paper-font-common-expensive-kerning_-_text-rendering); 
+  opacity: var(--dark-primary-opacity); 
+  padding: 24px 16px 20px 0px;
+  color: var(--primary-text-color);
+}
+
+/* controler div setting need to beadjusted to hassio */
+#controler {
+  position: absolute;
+  left: 100px;
+  width: 400px;
+}
+
+div.tempbox {
+  font-size: calc(var(--base-unit) * 0.5);
+  line-height: calc(var(--base-unit) * 0.5);
+  color: var(--primary-text-color);
+  padding: 2px 2px 2px 4px;
+  border: solid 1px grey;
+  background: rgba(255, 255, 147, 0.589);
+
+  position: relative;
+  top: 0px;
+  left: 0px;
+  width: 50px;
+  height: 20px;
+}
+
+.tempsymbol {
+  margin-left: 4px;
+}
+
+.tempvalue {
+  font-size: calc(var(--base-unit) * 0.7);
+  font-weight: bold;
+}
+
+div.room {
+  position: relative;
+
+  top: 0px;
+  left: 54px;
+  width: 142px;
+
+  padding: 2px 2px 2px 2px;
+
+  text-align: center;
+  color: blue;
+  border: solid 1px lightblue;
+}
+
+
+div.zoneroom {
+  position: relative;
+  top: calc(50% - 60px);
+  width: 50%;
+  text-align: center;
+  margin: auto;
+
+  top: 0px;
+
+  padding: 2px 2px 2px 2px;
+
+  color: blue;
+  border: solid 1px lightblue;
+}
+
+div.inline_tempbox {
+  font-size: calc(var(--base-unit) * 0.5);
+  line-height: calc(var(--base-unit) * 0.5);
+  
+  color: var(--primary-text-color);
+
+  padding: 2px 2px 2px 4px;
+  border: solid 1px grey;
+  background: rgba(255, 255, 147, 0.589);
+
+
+
+  width: 50px;
+  height: 20px;
+}
+
+#inputline
+{
+  float:left;
+  background: lightsalmon;
+  margin-left: 100px;
+
+  width: 60px;
+  height: 200px; /* how to get the full width? */
+}
+
+#outputline
+{
+  float: right;
+  background: lightsalmon;
+  
+  margin-right: 50px;
+
+  width: 100px;
+  height: 250px;
+}
+
+div.zone
+{
+  position: relative;
+  background: lightyellow;
+}
+
+div.zonelabel
+{
+  position: absolute;
+  left: -140pt;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+
+  color:grey;
+  font-size: 18pt;  /* calc(var(--base-unit) * 0.2); */
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+  /* Safari */
+-webkit-transform: rotate(-90deg);
+
+/* Firefox */
+-moz-transform: rotate(-90deg);
+
+/* IE */
+-ms-transform: rotate(-90deg);
+
+/* Opera */
+-o-transform: rotate(-90deg);
+}
+
+div.refreshtime
+{
+  color:grey;
+  font-size: 8pt;  /* calc(var(--base-unit) * 0.2); */
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.debugoutline
+{
+  border: dashed 1px lightcoral;
+}
+
+.debugoutline0
+{
+  border: dashed 2px lightslategray;
+}
