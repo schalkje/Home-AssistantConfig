@@ -1,0 +1,20 @@
+{
+  "deployment_key": [],
+  "deployment_key_protocol": "rsa",
+  "deployment_user": "",
+  "deployment_password": "",
+  "git_branch": "install_201910",
+  "git_command": "pull",
+  "git_remote": "origin",
+  "git_prune": false,
+  "repository": "https://github.com/schalkje/Home-AssistantConfig/tree/install_201910",
+  "auto_restart": false,
+  "restart_ignore": [
+    "ui-lovelace.yaml",
+    ".gitignore"
+  ],
+  "repeat": {
+    "active": false,
+    "interval": 300
+  }
+}
