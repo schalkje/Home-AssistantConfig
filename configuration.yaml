@@ -15,22 +15,29 @@ homeassistant:
    - type: homeassistant
    - type: legacy_api_password
 
+automation: !include yaml/automations.yaml
 customize: !include yaml/customize.yaml
-group: !include groups.yaml
-automation: !include automations.yaml
-script: !include scripts.yaml
+group: !include yaml/groups.yaml
+input_boolean: !include yaml/input_booleans.yaml
+light: !include yaml/lights.yaml
+mqtt: !include yaml/mqtt.yaml
+mysensors: !include yaml/mysensors.yaml
+script: !include yaml/scripts.yaml
+sensor: !include yaml/sensors.yaml
+switch: !include yaml/switches.yaml
+
 
 # Show links to resources in log and frontend; disable to hide
 # introduction:
 
 # Enables the frontend
-frontend:
-  javascript_version: latest
+# frontend:
+#   javascript_version: latest
 
 # Swtich to Lovelace YAML mode
 #     https://www.home-assistant.io/lovelace/yaml-mode/
-lovelace:
-  mode: yaml
+# lovelace:
+#   mode: yaml
 
 # Enables configuration UI
 config:
@@ -45,26 +52,6 @@ http:
   # legacy_api_password support has been enabled. If you don't require it, remove the 'api_password' from your http config.
   # api_password: !secret http_password 
 
-  
-# climate:
-#   - platform: generic_thermostat
-#     name: Study
-#     target_sensor: sensor.2temperature
-climate:
-  - platform: generic_thermostat
-    name: LivingRoomm
-    heater: switch.3_heater
-    target_sensor: sensor.3_temperature
-    min_temp: 5
-    max_temp: 25
-    ac_mode: false
-    hot_tolerance: 0.5
-    cold_tolerance: 0.1
-    min_cyle_duration:
-      minutes: 5
-    keep_alive:
-      minutes: 30
-    initial_operation_mode: 'auto'
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -104,9 +91,15 @@ zone:
     radius: 50
     icon: mdi:school
 
-  - name: Van Lanschot Den Bosch
-    latitude: 51.691235 
-    longitude: 5.292575
+  - name: Werk Jeroen Den Bosch
+    latitude: work_latitude
+    longitude: work_longitude
+    radius: 100
+    icon: mdi:account-clock
+
+  - name: Werk Jeroen Amsterdam
+    latitude: work_amsterdam_latitude
+    longitude: work_amsterdam_longitude
     radius: 100
     icon: mdi:account-clock
 
@@ -126,9 +119,6 @@ weather 2:
     mode: daily # The forecast type. Can be hourly or daily. Default value: hourly
 
 
-sensor: !include yaml/sensors.yaml
-switch: !include yaml/switches.yaml
-input_boolean: !include yaml/input_booleans.yaml
 
 # https://www.home-assistant.io/components/alarm_control_panel.manual/
 alarm_control_panel:
@@ -163,22 +153,12 @@ device_tracker:
 # Cloud
 cloud:
 
-# MQTT Broker configuration
-# REF: https://www.home-assistant.io/docs/mqtt/broker/#run-your-own
-mqtt: !include yaml/mqtt.yaml
-  
-mysensors: !include yaml/mysensors.yaml
 
-group: !include yaml/groups.yaml
-automation: !include yaml/automations.yaml
-script: !include yaml/scripts.yaml
-light: !include yaml/lights.yaml
-
-panel_iframe:
- nodered:
-   title: 'Node-Red'
-   icon: 'mdi:shuffle-variant'
-   url: 'http://192.168.1.18:1880/'
+# panel_iframe:
+#  nodered:
+#    title: 'Node-Red'
+#    icon: 'mdi:shuffle-variant'
+#    url: 'http://192.168.1.18:1880/'
 
 # enable mqtt logging
 logger:
