@@ -2,6 +2,11 @@
 My [Home Assistant](https://home-assistant.io) configuration
 
 ## Configuration
+   * Samba
+   * DuckDNS
+   * MQTT
+   * Node-RED
+   * MySensors Gateway
 
 ### Server
    * RaspPi3 running hass.io
