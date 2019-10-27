@@ -1,0 +1,109 @@
+elements:
+  - type: state-label
+    entity: sensor.floor_downstairs_environment
+    style:
+      top: 10%
+      left: 78%
+      font-weight: bold
+      font-size: 150%
+      color: lightgray
+  - type: state-label
+    entity: sensor.floor_downstairs_main_in
+    style:
+      top: 10%
+      left: 28%
+      font-weight: bold
+      color: darkred
+  - type: state-label
+    entity: sensor.floor_downstairs_main_out
+    style:
+      top: 15%
+      left: 38%
+      font-weight: bold
+      color: blue
+  - type: state-label
+    entity: sensor.floor_downstairs_1_in
+    style:
+      top: 87%
+      left: 30%
+      color: darkred
+  - type: state-label
+    entity: sensor.floor_downstairs_2_in
+    style:
+      top: 87%
+      left: 39%
+      color: darkred
+  - type: state-label
+    entity: sensor.floor_downstairs_3_in
+    style:
+      top: 87%
+      left: 47%
+      color: darkred
+  - type: state-label
+    entity: sensor.floor_downstairs_4_in
+    style:
+      top: 87%
+      left: 57%
+      color: darkred
+  - type: state-label
+    entity: sensor.floor_downstairs_5_in
+    style:
+      top: 87%
+      left: 66%
+      color: darkred
+  - type: state-label
+    entity: sensor.floor_downstairs_6_in
+    style:
+      top: 87%
+      left: 74%
+      color: darkred
+  - type: state-label
+    entity: sensor.floor_downstairs_7_in
+    style:
+      top: 87%
+      left: 83%
+      color: darkred
+  - type: state-label
+    entity: sensor.floor_downstairs_1_out
+    style:
+      top: 41%
+      left: 34%
+      color: blue
+  - type: state-label
+    entity: sensor.floor_downstairs_2_out
+    style:
+      top: 41%
+      left: 43%
+      color: blue
+  - type: state-label
+    entity: sensor.floor_downstairs_3_out
+    style:
+      top: 41%
+      left: 51%
+      color: blue
+  - type: state-label
+    entity: sensor.floor_downstairs_4_out
+    style:
+      top: 41%
+      left: 61%
+      color: blue
+  - type: state-label
+    entity: sensor.floor_downstairs_5_out
+    style:
+      top: 41%
+      left: 69%
+      color: blue
+  - type: state-label
+    entity: sensor.floor_downstairs_6_out
+    style:
+      top: 41%
+      left: 78%
+      color: blue
+  - type: state-label
+    entity: sensor.floor_downstairs_7_out
+    style:
+      top: 41%
+      left: 88%
+      color: blue
+image: /local/images/heater.png
+type: picture-elements

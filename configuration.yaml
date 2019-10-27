@@ -13,10 +13,10 @@ homeassistant:
   # Customization file
   auth_providers:
    - type: homeassistant
-   - type: legacy_api_password
+  # - type: legacy_api_password
 
 automation: !include yaml/automations.yaml
-customize: !include yaml/customize.yaml
+# customize: !include yaml/customize.yaml
 group: !include yaml/groups.yaml
 input_boolean: !include yaml/input_booleans.yaml
 light: !include yaml/lights.yaml
@@ -26,6 +26,9 @@ script: !include yaml/scripts.yaml
 sensor: !include yaml/sensors.yaml
 switch: !include yaml/switches.yaml
 
+# enable system health monitoring
+# https://www.home-assistant.io/integrations/system_health/
+system_health:
 
 # Show links to resources in log and frontend; disable to hide
 # introduction:
@@ -34,7 +37,7 @@ switch: !include yaml/switches.yaml
 # frontend:
 #   javascript_version: latest
 
-# Swtich to Lovelace YAML mode
+# Switch to Lovelace YAML mode
 #     https://www.home-assistant.io/lovelace/yaml-mode/
 # lovelace:
 #   mode: yaml
@@ -92,47 +95,47 @@ zone:
     icon: mdi:school
 
   - name: Werk Jeroen Den Bosch
-    latitude: work_latitude
-    longitude: work_longitude
+    latitude: !secret work_latitude
+    longitude: !secret work_longitude
     radius: 100
     icon: mdi:account-clock
 
   - name: Werk Jeroen Amsterdam
-    latitude: work_amsterdam_latitude
-    longitude: work_amsterdam_longitude
+    latitude: !secret work_amsterdam_latitude
+    longitude: !secret work_amsterdam_longitude
     radius: 100
     icon: mdi:account-clock
 
 # Track the sun
 sun:
 
-weather 1:
-  - platform: buienradar
-    name: buienradar1
-    entity: brw
-    forecast: True
+# weather 1:
+#   - platform: buienradar
+#     name: buienradar1
+#     entity: brw
+#     forecast: True
 
-weather 2:
-  - platform: darksky
-    name: darksky
-    api_key: !secret darksky_API_KEY
-    mode: daily # The forecast type. Can be hourly or daily. Default value: hourly
+# weather 2:
+#   - platform: darksky
+#     name: darksky
+#     api_key: !secret darksky_API_KEY
+#     mode: daily # The forecast type. Can be hourly or daily. Default value: hourly
 
 
 
-# https://www.home-assistant.io/components/alarm_control_panel.manual/
-alarm_control_panel:
-  - platform: manual
-    name: alarm
-    code: 1234
-    pending_time: 30
-    delay_time: 20
-    trigger_time: 4
-    disarmed:
-      trigger_time: 0
-    armed_home:
-      pending_time: 0
-      delay_time: 0
+# # https://www.home-assistant.io/components/alarm_control_panel.manual/
+# alarm_control_panel:
+#   - platform: manual
+#     name: alarm
+#     code: 1234
+#     pending_time: 30
+#     delay_time: 20
+#     trigger_time: 4
+#     disarmed:
+#       trigger_time: 0
+#     armed_home:
+#       pending_time: 0
+#       delay_time: 0
 
 
   # Text to speech
@@ -151,7 +154,7 @@ device_tracker:
      - 192.168.1.19
 
 # Cloud
-cloud:
+# cloud:
 
 
 # panel_iframe:
