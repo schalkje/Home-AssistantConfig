@@ -1,3 +1,16 @@
+ # f the MQTT broker or Hass is restarted, or there is a WiFi outage, Tasmota device state may 
+ # not be synced with Home Assistant. Use this automation to get all your (auto discovered) 
+ # devices in sync, including power state, immediately after Home Assistant is (re)started.
+ # https://github.com/arendst/Tasmota/wiki/Home-Assistant
+  - alias: "Power state on HA start-up"
+    trigger:
+      platform: homeassistant
+      event: start
+    action:
+      - service: mqtt.publish
+        data:
+          topic: "sonoffs/cmnd/state"
+          payload: ""
  # test automation from : https://www.home-assistant.io/getting-started/automation/
   - alias: Check sensor value and show notification
     trigger:
