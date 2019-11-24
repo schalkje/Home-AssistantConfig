@@ -622,7 +622,7 @@
   },
   "node-red-contrib-interval-length": {
    "name": "node-red-contrib-interval-length",
-   "version": "0.0.3",
+   "version": "0.0.4",
    "local": false,
    "nodes": {
     "interval-length": {
@@ -804,7 +804,7 @@
   },
   "node-red-node-base64": {
    "name": "node-red-node-base64",
-   "version": "0.1.3",
+   "version": "0.2.0",
    "local": false,
    "nodes": {
     "base64": {
@@ -890,7 +890,7 @@
   },
   "node-red-node-ping": {
    "name": "node-red-node-ping",
-   "version": "0.0.16",
+   "version": "0.1.0",
    "local": false,
    "nodes": {
     "ping": {
@@ -1446,7 +1446,8 @@
      "view-node-show-label": true,
      "view-show-tips": true
     }
-   }
+   },
+   "menu-menu-item-sidebar": true
   }
  }
 }

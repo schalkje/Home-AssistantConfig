@@ -24,6 +24,18 @@
   - platform: mqtt
     name: "3 heater"
     state_topic: "mysensors-in/3/12"   
+  - platform: mqtt
+    name: "4 temperature"
+    state_topic: "mysensors-out/4/11/#"
+  - platform: mqtt
+    name: "4 humidity"
+    state_topic: "mysensors-out/4/10/#"    
+  - platform: mqtt
+    name: "5 temperature"
+    state_topic: "mysensors-out/5/11/#"
+  - platform: mqtt
+    name: "5 humidity"
+    state_topic: "mysensors-out/5/10/#" 
   # floor heater downstairs
   - platform: mqtt
     name: "floor downstairs 1 in"
