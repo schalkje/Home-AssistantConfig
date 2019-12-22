@@ -3,7 +3,7 @@
 # REF: https://www.home-assistant.io/docs/mqtt/broker/#run-your-own
 # based on https://github.com/brahmafear/hass_config/blob/master/yaml/mqtt.yaml
 # stripped to: https://forum.mysensors.org/topic/5832/struggling-with-configure-yaml/21
-  broker: 192.168.1.18
-  port: 1883
-  client_id: home-assistant-1
-  keepalive: 60
+  broker: 192.168.1.18 # The IP address or hostname of your MQTT broker, e.g., 192.168.1.32.
+  port: 1883 # The network port to connect to. Default is 1883.
+  # client_id: home-assistant # The client ID that Home Assistant will use. Has to be unique on the server. Default is a randomly generated one.
+  keepalive: 60 # The time in seconds between sending keep alive messages for this client. Default is 60.
