@@ -148,6 +148,23 @@ tts:
 
 ios:
 
+  # Example configuration.yaml entry
+google_assistant:
+  project_id: home-assistant-9400b
+  service_account: !include service_account.json
+  report_state: true
+  exposed_domains:
+    - switch
+    - light
+  entity_config:
+    light.tafel_1:
+      expose: false      
+    light.tafel_2:
+      expose: false      
+    light.woonkamer_lampen:
+      expose: false    
+
+
 # https://www.home-assistant.io/components/device_tracker.nmap_tracker/
 device_tracker:
   - platform: nmap_tracker
