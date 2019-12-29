@@ -14,6 +14,8 @@
 !node-red
 !mysensors
 !.cloud/lovelace
+!.storage\lovelace
+!.storage/lovelace
 !www
 !www/heat-controler
 
@@ -27,3 +29,6 @@ ip_bans.yaml
 secrets.yaml
 known_devices.yaml
 service_account.json
+
+!.storage\lovelace
+!.storage/lovelace
