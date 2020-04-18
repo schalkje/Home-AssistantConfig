@@ -1,0 +1,35 @@
+  kantoor:
+    name: Kantoor
+    entities:
+      - switch.tasmota_24_1
+      - switch.tasmota_24_2
+      - switch.tasmota_24_3
+  keuken:
+    name: Keuken
+    entities:
+      - switch.tasmota_1_1
+      - switch.tasmota_17_1    
+  woonkamer:
+    name: Woonkamer
+    entities:
+      - switch.tasmota_plug_1  
+      - light.bollamp
+      - light.tafel_1
+      - light.tafel_2
+  all_lights:
+    name: Alle lichten
+    entities:
+      - group.kantoor
+      - group.keuken
+      - group.woonkamer
+      - switch.tasmota_11_2 # keuken muur lamp
+      - switch.tasmota_4 # Hal 2      
+  comminghome_lamps:
+    name: Comming home
+    entities:
+      - light.tafel_1
+      - switch.tasmota_4 # Hal 2  
+      - switch.tasmota_11_2 # keuken muur lamp 
+      - switch.tasmota_17_1 # keuken tafel
+      - switch.tasmota_22_2 # Hal 1
+
