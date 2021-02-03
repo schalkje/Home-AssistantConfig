@@ -24,12 +24,18 @@
       - group.woonkamer
       - switch.tasmota_11_2 # keuken muur lamp
       - switch.tasmota_4 # Hal 2      
+      - switch.tasmota_22_2 # Hal 1
+      - switch.sonoff_zolder_bottom1
+      - switch.tasmota_7 # Woonkamer trap licht
   comminghome_lamps:
     name: Comming home
     entities:
-      - light.tafel_1
+      - light.tafel_1 # woonkamer lamp1
       - switch.tasmota_4 # Hal 2  
+      - switch.tasmota_7 # Woonkamer trap licht
       - switch.tasmota_11_2 # keuken muur lamp 
       - switch.tasmota_17_1 # keuken tafel
       - switch.tasmota_22_2 # Hal 1
+      - switch.sonoff_zolder_bottom1
+    all: true
 

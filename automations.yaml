@@ -1,0 +1,116 @@
+- id: '1612298109377'
+  alias: Ikea - On
+  description: ''
+  trigger:
+  - device_id: 8983f5c81ed42d38db2861ef87c9b901
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_on
+  condition: []
+  action:
+  - type: toggle
+    device_id: f45a011221e9e2d6825a3cb5f8343c9d
+    entity_id: light.ikea_of_sweden_tradfri_bulb_e14_w_op_ch_400lm_c4e590fe_level_on_off
+    domain: light
+  mode: single
+- id: '1612298202703'
+  alias: Ikea - Power
+  description: ''
+  trigger:
+  - device_id: 8983f5c81ed42d38db2861ef87c9b901
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_on
+  condition: []
+  action:
+  - type: toggle
+    device_id: f45a011221e9e2d6825a3cb5f8343c9d
+    entity_id: light.ikea_of_sweden_tradfri_bulb_e14_w_op_ch_400lm_c4e590fe_level_on_off
+    domain: light
+  mode: single
+- id: '1612298291985'
+  alias: Ikea - Power
+  description: ''
+  trigger:
+  - device_id: 8983f5c81ed42d38db2861ef87c9b901
+    domain: zha
+    platform: device
+    type: remote_button_long_press
+    subtype: dim_up
+  condition: []
+  action:
+  - type: brightness_increase
+    device_id: f45a011221e9e2d6825a3cb5f8343c9d
+    entity_id: light.ikea_of_sweden_tradfri_bulb_e14_w_op_ch_400lm_c4e590fe_level_on_off
+    domain: light
+  mode: single
+- id: '1612298947374'
+  alias: New Automation
+  description: ''
+  trigger:
+  - device_id: 8983f5c81ed42d38db2861ef87c9b901
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: dim_up
+  condition: []
+  action:
+  - type: toggle
+    device_id: f45a011221e9e2d6825a3cb5f8343c9d
+    entity_id: light.ikea_of_sweden_tradfri_bulb_e14_w_op_ch_400lm_c4e590fe_level_on_off
+    domain: light
+  mode: single
+- id: '1612299545286'
+  alias: New Automation2
+  description: asdfsdf
+  trigger:
+  - device_id: 8983f5c81ed42d38db2861ef87c9b901
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_on
+  condition: []
+  action:
+  - type: toggle
+    device_id: f45a011221e9e2d6825a3cb5f8343c9d
+    entity_id: light.ikea_of_sweden_tradfri_bulb_e14_w_op_ch_400lm_c4e590fe_level_on_off
+    domain: light
+  mode: single
+- id: '1612339458487'
+  alias: WC licht aan
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: 6f44e6c561007415499c03a8995ca655
+    entity_id: binary_sensor.konke_3afe28010402000d_155f07fe_ias_zone
+    domain: binary_sensor
+  condition: []
+  action:
+  - type: turn_off
+    device_id: f45a011221e9e2d6825a3cb5f8343c9d
+    entity_id: light.ikea_of_sweden_tradfri_bulb_e14_w_op_ch_400lm_c4e590fe_level_on_off
+    domain: light
+  mode: single
+- id: '1612339630734'
+  alias: New Automation
+  description: ''
+  use_blueprint:
+    path: homeassistant/motion_light.yaml
+    input:
+      no_motion_wait: '5'
+      motion_entity: binary_sensor.konke_3afe28010402000d_155f07fe_ias_zone
+      light_target:
+        device_id: f45a011221e9e2d6825a3cb5f8343c9d
+- id: '1612340174330'
+  alias: Test motion light
+  description: aaa
+  use_blueprint:
+    path: homeassistant/motion_light.yaml
+    input:
+      no_motion_wait: '5'
+      motion_entity: binary_sensor.konke_3afe28010402000d_155f07fe_ias_zone
+      light_target:
+        device_id: f45a011221e9e2d6825a3cb5f8343c9d

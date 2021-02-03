@@ -8,4 +8,4 @@
     name: Woonkamer_lampen
     entities:
       - light.bollamp
-      - light.Eettafel
+      - light.eettafel

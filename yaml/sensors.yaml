@@ -8,7 +8,6 @@
       - windspeed
       - pressure
   # Weather prediction
-  - platform: yr
   - platform: mqtt
     name: "2 temperature"
     state_topic: "mysensors-out/2/11/#"
