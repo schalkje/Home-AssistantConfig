@@ -38,4 +38,10 @@
       - switch.tasmota_22_2 # Hal 1
       - switch.sonoff_zolder_bottom1
     all: true
+  wc-motion:
+    name: wc-motion-and-magnet
+    entities:
+      - binary_sensor.konke_3afe28010402000d_155f07fe_ias_zone
+      - binary_sensor.lumi_lumi_sensor_magnet_aq2_064cdd01_on_off
+
 

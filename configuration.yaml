@@ -23,16 +23,24 @@ homeassistant:
   #  - type: homeassistant
   # - type: legacy_api_password
 
-automation: !include yaml/automations.yaml
+#automation: !include yaml/automations.yaml
+automation: !include automations.yaml
 # customize: !include yaml/customize.yaml
 group: !include yaml/groups.yaml
 input_boolean: !include yaml/input_booleans.yaml
 light: !include yaml/lights.yaml
-mqtt: !include yaml/mqtt.yaml
 mysensors: !include yaml/mysensors.yaml
 script: !include yaml/scripts.yaml
 sensor: !include yaml/sensors.yaml
 switch: !include yaml/switches.yaml
+
+# mqtt: !include yaml/mqtt.yaml
+mqtt: 
+  broker: 192.168.1.18 # The IP address or hostname of your MQTT broker, e.g., 192.168.1.32.
+  port: 1883 # The network port to connect to. Default is 1883.
+  # client_id: home-assistant # The client ID that Home Assistant will use. Has to be unique on the server. Default is a randomly generated one.
+  keepalive: 60 # The time in seconds between sending keep alive messages for this client. Default is 60.
+
 
 # enable system health monitoring
 # https://www.home-assistant.io/integrations/system_health/
