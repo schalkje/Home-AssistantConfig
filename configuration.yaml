@@ -23,9 +23,7 @@ homeassistant:
   #  - type: homeassistant
   # - type: legacy_api_password
 
-#automation: !include yaml/automations.yaml
 automation: !include automations.yaml
-# customize: !include yaml/customize.yaml
 group: !include yaml/groups.yaml
 input_boolean: !include yaml/input_booleans.yaml
 light: !include yaml/lights.yaml

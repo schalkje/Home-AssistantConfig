@@ -16,6 +16,7 @@
 !*.png
 !*.html
 !*.css
+!blueprints/automation/schalken/*.yaml
 !yaml
 !node-red
 !mysensors
@@ -23,6 +24,7 @@
 !.storage/lovelace
 !www
 !www/heat-controler
+
 
 
 # Ensure these YAML files are ignored, otherwise your secret data/credentials will leak.
