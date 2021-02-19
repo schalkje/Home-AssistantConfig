@@ -180,3 +180,24 @@
       light: light.test_ikea_e27_806lm
       wait-for-movement-duration: '6'
       duration: '31'
+- id: '1613726721789'
+  alias: Jeroen Switch 2 - ZHA - Aqara Wireless Mini Switch
+  description: Switych Jeroen
+  use_blueprint:
+    path: SeanM/zha-aqara-wireless-mini-switch.yaml
+    input:
+      aqara_mini_switch: 4a56ecc1897b7e39e90e719db1afb676
+      button_single_press:
+      - type: toggle
+        device_id: ad2b2d4df76c4fc3ba2ba3902e20cbdf
+        entity_id: switch.tasmota_3_1
+        domain: switch
+      button_double_press:
+      - type: toggle
+        device_id: ad2b2d4df76c4fc3ba2ba3902e20cbdf
+        entity_id: switch.tasmota_3_2
+        domain: switch
+      button_long_press:
+      - service: homeassistant.turn_off
+        data: {}
+        entity_id: group.master_lights
