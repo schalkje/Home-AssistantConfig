@@ -1,0 +1,12 @@
+# documentation: https://www.home-assistant.io/components/light.group/
+- platform: group
+  name: Eettafel
+  entities:
+    - light.tafel_1_new
+    - light.tafel_2_new_2
+- platform: group
+  name: Woonkamer_lampen
+  entities:
+    - light.bollamp_new
+    - light.tafel_1_new
+    - light.tafel_2_new_2

@@ -1,0 +1,125 @@
+blueprint:
+  name: Schalken Toilet Light
+  description: This blueprint combines a movement detection sensor with a door magnet to create a light switch combination to use the advantages of both of them. This creates a very nice automatization that makes even your sceptic partner an home automation convert.
+  domain: automation
+
+  input:
+    motion_entity:
+      name: Motion sensor
+      selector:
+        entity:
+          domain: binary_sensor
+          device_class: motion
+
+    magnet_entity:
+      name: Magnet sensor
+      selector:
+        entity:
+          domain: binary_sensor
+
+    light_target:
+      name: Light
+      description: Light or other device to switch
+      default: []
+      selector:
+        target:
+          entity:
+            domain: light
+
+    door_open_wait:
+      name: Door open timer
+      description: Time to leave the light on after the door is opened
+      default: 5
+      selector:
+        number:
+          min: 0
+          max: 120
+          unit_of_measurement: seconds
+
+    door_close_wait:
+      name: Door close timer
+      description: Time to leave the light on after the door is closed; this shouldn't be less than the time the mation sensor send a new movement message; on a Komke sensor this is 30 seconds
+      default: 35
+      selector:
+        number:
+          min: 0
+          max: 120
+          unit_of_measurement: seconds
+
+    no_motion_wait:
+      name: Motion timer
+      description: Time to leave the light on after last motion is detected.
+      default: 120
+      selector:
+        number:
+          min: 0
+          max: 360
+          unit_of_measurement: seconds
+
+# if motion is detected within the delay, the script is restarted
+mode: restart
+
+
+trigger:
+  - platform: state
+    entity_id: !input motion_entity
+    to: "on"
+    id: "motion_trigger"
+  - platform: state
+    entity_id: !input magnet_entity
+    from: "off"
+    to: "on"
+    id: "magnet_trigger_on"
+  # - platform: state
+  #   entity_id: !input magnet_entity
+  #   from: "on"
+  #   to: "off"
+  #   id: "magnet_trigger_off"    
+
+action:
+- choose:
+  - conditions:
+    - condition: template
+      value_template: '{{ trigger.id == "magnet_trigger_on" }}'
+    sequence: 
+    - alias: "Turn on the light"
+      service: light.turn_on
+      target: !input light_target
+    - alias: "Wait until there is no motion from device"
+      wait_for_trigger:
+        platform: state
+        entity_id: !input motion_entity
+        from: "on"
+        to: "off"      
+    - alias: "Wait the number of seconds that has been set"
+      delay: !input door_open_wait
+    - alias: "Turn off the light"
+      service: light.turn_off
+      target: !input light_target
+  - conditions:
+    - condition: template
+      value_template: '{{ trigger.id == "magnet_trigger_off" }}'
+    sequence: 
+    - alias: "Wait the number of seconds that has been set"
+      delay: !input door_close_wait
+    - alias: "Turn off the light"
+      service: light.turn_off
+      target: !input light_target
+  - conditions:
+    - condition: template
+      value_template: '{{ trigger.id == "motion_trigger" }}'
+    sequence: 
+    - alias: "Turn on the light"
+      service: light.turn_on
+      target: !input light_target
+    - alias: "Wait until there is no motion from device"
+      wait_for_trigger:
+        platform: state
+        entity_id: !input motion_entity
+        from: "on"
+        to: "off"    
+    - alias: "Wait the number of seconds that has been set"
+      delay: !input no_motion_wait
+    - alias: "Turn off the light"
+      service: light.turn_off
+      target: !input light_target

@@ -1,0 +1,129 @@
+resources:
+  - url: /local/simple-thermostat/simple-thermostat.js?v=2
+    type: module
+  - url: /local/content-card-example.js
+    type: js
+  - url: /local/mini-graph-card-bundle.js?v=0.1.0
+    type: module
+  - url: /local/lightslider/lightslider.js?v=0.1.1
+    type: module
+  - url: /local/heat-controler/heat-controler.js?v=0.2.164
+    type: module
+
+# custom_updater:
+#   card_urls:
+#     - https://raw.githubusercontent.com/nervetattoo/simple-thermostat/allow-updates/tracker.json
+views:
+  - title: Woonkamer
+    icon: mdi:home
+    path: default_view
+    badges: 
+      - device_tracker.jeroensipad
+      - device_tracker.iphonevanjeroen
+      - device_tracker.iphone_van_jeroen
+    cards: 
+      - type: media-control
+        entity: media_player.woonkamer
+      - type: entities
+        title: Woonkamper lampen
+        show_header_toggle: false
+        entities:
+          - entity: light.woonkamer_lampen
+          - entity: light.bollamp
+          - entity: light.eettafel
+          - switchEntity: light.eettafel
+            type: custom:light-slider
+          - entity: light.led_lamp_4_bureau
+  - title: Heat Controler
+    icon: mdi:fire
+    cards: 
+      - type: entities
+        title: Heating Controler
+        entities:
+          - entity: sensor.floor_downstairs_main_in
+          - entity: sensor.floor_downstairs_main_out
+          - entity: sensor.floor_downstairs_1_in
+          - entity: sensor.floor_downstairs_1_out
+          - entity: sensor.floor_downstairs_2_in
+          - entity: sensor.floor_downstairs_2_out
+          - entity: sensor.floor_downstairs_3_in
+          - entity: sensor.floor_downstairs_3_out
+          - entity: sensor.floor_downstairs_4_in
+          - entity: sensor.floor_downstairs_4_out
+          - entity: sensor.floor_downstairs_5_in
+          - entity: sensor.floor_downstairs_5_out
+          - entity: sensor.floor_downstairs_6_in
+          - entity: sensor.floor_downstairs_6_out
+          - entity: sensor.floor_downstairs_7_in
+          - entity: sensor.floor_downstairs_7_out
+      - title: Downstairs heat controller
+        type: custom:heat-controler
+        input: sensor.floor_downstairs_main_in
+        output: sensor.floor_downstairs_main_out
+        zones:
+          - zone: Beneden
+            circuits:
+              - circuit: beneden 1
+                input: sensor.floor_downstairs_6_in
+                output: sensor.floor_downstairs_6_out
+                rooms: 
+                  - room: Hal 1
+                  - room: Hal 2
+                    temperature: sensor.2_temperature
+                    humidity: sensor.2_humidity
+                  - room: Washok
+              - circuit: beneden 2
+                input: sensor.floor_downstairs_7_in
+                output: sensor.floor_downstairs_7_out
+                rooms: 
+                  - room: Study
+          - zone: Woonkamer
+            rooms: 
+              - room: Woonkamer
+                temperature: sensor.3_temperature
+                humidity: sensor.3_humidity
+            circuits:
+              - circuit: living 1
+                input: sensor.floor_downstairs_1_in
+                output: sensor.floor_downstairs_1_out
+              - circuit: living 2
+                input: sensor.floor_downstairs_2_in
+                output: sensor.floor_downstairs_2_out
+              - circuit: living 3              
+                input: sensor.floor_downstairs_3_in
+                output: sensor.floor_downstairs_3_out
+          - zone: Keuken
+            rooms: 
+              - room: Keuken
+            circuits:
+              - circuit: keuken 1
+                input: sensor.floor_downstairs_4_in
+                output: sensor.floor_downstairs_4_out
+              - circuit: keuken achter
+                input: sensor.floor_downstairs_5_in
+                output: sensor.floor_downstairs_5_out          
+  - title: Status
+    icon: mdi:chevron-down-box
+    path: states
+    badges: 
+      - input_boolean.nobody_home
+      - input_boolean.automatic_day_start
+      - input_boolean.evening_movement_triggered
+    cards: 
+      - type: entities
+        title: States
+        show_header_toggle: false
+        entities:
+          - entity: input_boolean.nobody_home
+          - entity: input_boolean.automatic_day_start
+          - entity: input_boolean.evening_movement_triggered
+      - type: entities
+        title: States 
+        show_header_toggle: false         
+        entities:
+          - entity: input_boolean.livingroom_mode_morning
+          - entity: input_boolean.livingroom_mode_evening
+          - entity: input_boolean.livingroom_mode_tv
+          - entity: input_boolean.livingroom_mode_boardgame
+          - entity: input_boolean.livingroom_mode_night
+          - entity: input_boolean.livingroom_mode_night_off

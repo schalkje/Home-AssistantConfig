@@ -1,0 +1,37 @@
+# A * ensures that everything will be ignored...
+*
+
+
+# Ignore folders.
+.storage
+.cloud
+.google.token
+
+
+# You can whitelist files/folders with !, these will not be ignored.
+!*.yaml
+!.gitignore
+!*.md
+!*.js
+!*.json
+!*.png
+!*.html
+!*.css
+!blueprints
+# include all subfolders from
+!blueprints/** 
+!yaml
+!node-red
+!mysensors
+!.storage/lovelace
+!www
+!www/**
+
+
+
+# Ensure these YAML files are ignored, otherwise your secret data/credentials will leak.
+ip_bans.yaml
+secrets.yaml
+known_devices.yaml
+service_account.json
+

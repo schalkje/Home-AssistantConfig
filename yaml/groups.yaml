@@ -1,0 +1,54 @@
+kantoor:
+  name: Kantoor
+  entities:
+    - switch.tasmota_24_1
+    - switch.tasmota_24_2
+    - switch.tasmota_24_3
+keuken:
+  name: Keuken
+  entities:
+    - switch.tasmota_1_1 # Aanrecht
+    - switch.tasmota_17_1 # Eettafel
+woonkamer:
+  name: Woonkamer
+  entities:
+    - switch.tasmota_plug_1 # Woonkamer kast
+    - light.bollamp_new # bollamp
+    - light.tafel_1_new # woonkamer tafel 1
+    - light.tafel_2_new_2 # woonkamer tafel 2
+    # - light.tafel_2_new             # woonkamer tafel 2
+all_lights:
+  name: Alle lichten
+  entities:
+    - group.kantoor
+    - group.keuken
+    # Woonkamer kast
+    - switch.tasmota_plug_1
+    # bollamp
+    - light.bollamp_new
+    # woonkamer tafel 1
+    - light.tafel_1_new
+    # woonkamer tafel 2
+    # - light.tafel_2_new
+    - light.tafel_2_new_2
+    # keuken muur lamp
+    - switch.tasmota_11_2
+    # Hal 2
+    - switch.tasmota_4
+    # Hal 1
+    - switch.tasmota_22_2
+    # zolder halletje
+    - light.ikea_of_sweden_tradfri_bulb_e27_ww_clear_250lm_74a533fe_level_on_off
+    # Woonkamer trap licht
+    - light.ikea_of_sweden_tradfri_bulb_e27_ww_806lm_d36274fe_level_on_off
+comminghome_lamps:
+  name: Comming home
+  entities:
+    - light.tafel_1 # woonkamer lamp1
+    - switch.tasmota_4 # Hal 2
+    - switch.tasmota_7 # Woonkamer trap licht
+    - switch.tasmota_11_2 # keuken muur lamp
+    - switch.tasmota_17_1 # keuken tafel
+    - switch.tasmota_22_2 # Hal 1
+    - switch.sonoff_zolder_bottom1
+  all: true

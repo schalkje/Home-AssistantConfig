@@ -1,0 +1,10 @@
+# # https://www.home-assistant.io/components/sensor.buienradar/
+# - platform: buienradar
+#   name: buitenradar
+#   monitored_conditions:
+#     - symbol
+#     - humidity
+#     - temperature
+#     - windspeed
+#     - pressure
+# # Weather prediction

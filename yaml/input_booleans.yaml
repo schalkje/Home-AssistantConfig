@@ -1,0 +1,40 @@
+# documentation: https://www.home-assistant.io/components/input_boolean/
+# Pick any icon that you can find on http://materialdesignicons.com/ and prefix the name with mdi:
+  nobody_home:
+    name: Indicator that nobody is at home
+    initial: off
+    icon: mdi:home-account
+  automatic_day_start:
+    name: The system is triggered to autmatically startup in the morning
+    initial: on
+    icon: mdi:clock-start
+  # movement sensor has been triggeredwhile lights were off
+  evening_movement_triggered:
+    name: Movement sensor has been triggered while lights were off
+    initial: off
+    icon: mdi:cursor-move
+  # mood states
+  livingroom_mode_tv:
+    name: Watch tv in the living room
+    initial: off
+    icon: mdi:television
+  livingroom_mode_boardgame:
+    name: Play or work on the eettafel in the living room
+    initial: off
+    icon: mdi:cursor-move
+  livingroom_mode_night:
+    name: Set the lights for night strolling (living room)
+    initial: off
+    icon: mdi:weather-night
+  livingroom_mode_night_off:
+    name: Set the lights for night strolling off
+    initial: off
+    icon: mdi:weather-night
+  livingroom_mode_evening:
+    name: Set the lights for early evening (living room)
+    initial: off
+    icon: mdi:weather-sunset-down
+  livingroom_mode_morning:
+    name: Set the lights for early morning (living room)
+    initial: off
+    icon: mdi:weather-sunset-up

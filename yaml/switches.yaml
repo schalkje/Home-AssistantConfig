@@ -1,0 +1,36 @@
+# - platform: mqtt
+#   name: "3 heater"
+#   command_topic: "mysensors-in/3/12"
+
+# - platform: mqtt
+#   name: "Studie licht 1"
+#   state_topic: "sonoff_studie/stat/POWER1"
+#   command_topic: "sonoff_studie/cmnd/POWER1"
+#   availability_topic: "sonoff/studie/tele/LWT"
+#   qos: 1
+#   payload_on: "ON"
+#   payload_off: "OFF"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+
+# - platform: mqtt
+#   name: "Studie licht 2"
+#   state_topic: "sonoff_studie/stat/POWER2"
+#   command_topic: "sonoff_studie/cmnd/POWER2"
+#   availability_topic: "sonoff_studie/tele/LWT"
+#   qos: 1
+#   payload_on: "ON"
+#   payload_off: "OFF"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+
+# - platform: mqtt
+#   name: "Studie licht 3"
+#   state_topic: "sonoff_studie/stat/POWER3"
+#   command_topic: "sonoff_studie/cmnd/POWER3"
+#   availability_topic: "sonoff_studie/tele/LWT"
+#   qos: 1
+#   payload_on: "ON"
+#   payload_off: "OFF"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
