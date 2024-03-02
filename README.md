@@ -20,5 +20,8 @@ My [Home Assistant](https://home-assistant.io) configuration
 ## MySensor network
 Location for the sensor measures /config/path
 
+## WC State flow
+![WC State flow](./wc-flow.drawio.png)
+
 ## Resources
 [Instructions](https://home-assistant.io/cookbook/githubbackup/) for creating a github repository for your own config. 
