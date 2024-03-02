@@ -1,0 +1,3 @@
+# backup timer, to make sure the light is switched off after 10 minutes, even when someone leaves the door open, or falls asleep on the toilet
+wc1_status_timer:
+  duration: "00:10:00" # 10 minutes

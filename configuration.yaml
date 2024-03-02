@@ -25,6 +25,7 @@ light: !include yaml/lights.yaml
 script: !include yaml/scripts.yaml
 sensor: !include yaml/sensors.yaml
 switch: !include yaml/switches.yaml
+timer: !include yaml/timer.yaml
 
 mqtt: !include yaml/mqtt.yaml
 
