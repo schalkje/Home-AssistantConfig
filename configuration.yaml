@@ -15,45 +15,22 @@ homeassistant:
         - 192.168.1.0/24
         - 85.144.196.197 # my external ip adres
     - type: homeassistant
-
-  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: Europe/Amsterdam
-  # Customization file
-  # autkh_providers:
-  #  - type: homeassistant
-  # - type: legacy_api_password
 
-automation: !include automations.yaml
+automation: !include yaml/automations.yaml
 group: !include yaml/groups.yaml
 input_boolean: !include yaml/input_booleans.yaml
+input_select: !include yaml/input_selects.yaml
 light: !include yaml/lights.yaml
-#mysensors: !include yaml/mysensors.yaml
 script: !include yaml/scripts.yaml
 sensor: !include yaml/sensors.yaml
 switch: !include yaml/switches.yaml
 
 mqtt: !include yaml/mqtt.yaml
-# mqtt:
-#   broker: 192.168.1.18 # The IP address or hostname of your MQTT broker, e.g., 192.168.1.32.
-#   port: 1883 # The network port to connect to. Default is 1883.
-#   # client_id: home-assistant # The client ID that Home Assistant will use. Has to be unique on the server. Default is a randomly generated one.
-#   keepalive: 60 # The time in seconds between sending keep alive messages for this client. Default is 60.
 
 # enable system health monitoring
 # https://www.home-assistant.io/integrations/system_health/
 system_health:
-
-# Show links to resources in log and frontend; disable to hide
-# introduction:
-
-# Enables the frontend
-# frontend:
-#   javascript_version: latest
-
-# Switch to Lovelace YAML mode
-#     https://www.home-assistant.io/lovelace/yaml-mode/
-# lovelace:
-#   mode: yaml
 
 # Enables configuration UI
 config:
@@ -64,20 +41,6 @@ http:
   ssl_key: /ssl/privkey.pem
   ip_ban_enabled: True
   login_attempts_threshold: 3
-  # legacy_api_password support has been enabled. If you don't require it, remove the 'api_password' from your http config.
-  # api_password: !secret http_password
-
-# Checks for available updates
-# Note: This component will send some information about your system to
-# the developers to assist with development of Home Assistant.
-# For more information, please see:
-# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
-# updater:
-# Optional, allows Home Assistant developers to focus on popular components.
-# include_used_components: true
-
-# Discover some devices automatically
-# discovery:
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
@@ -132,89 +95,18 @@ recorder:
   exclude:
     domains:
       - automation
-      # - binary_sensor
       - camera
-      # - climate
-      # - device_tracker
-      # - group
-      # - input_boolean
       - input_text
-      # - light
-      # - person
-      # - sensor
       - sun
-      # - switch
       - water_heater
       - weather
       - weblink
       - updater
       - zone
 
-# weather 1:
-#   - platform: buienradar
-#     name: buienradar1
-#     entity: brw
-#     forecast: True
-
-# weather 2:
-#   - platform: darksky
-#     name: darksky
-#     api_key: !secret darksky_API_KEY
-#     mode: daily # The forecast type. Can be hourly or daily. Default value: hourly
-
-# # https://www.home-assistant.io/components/alarm_control_panel.manual/
-# alarm_control_panel:
-#   - platform: manual
-#     name: alarm
-#     code: 1234
-#     pending_time: 30
-#     delay_time: 20
-#     trigger_time: 4
-#     disarmed:
-#       trigger_time: 0
-#     armed_home:
-#       pending_time: 0
-#       delay_time: 0
-
 # Text to speech
 tts:
   - platform: google_translate
-
-# ios:
-
-# Example configuration.yaml entry
-# google_assistant:
-#   project_id: home-assistant-9400b
-#   service_account: !include service_account.json
-#   report_state: true
-#   exposed_domains:
-#     - switch
-#     - light
-#   entity_config:
-#     light.tafel_1:
-#       expose: false
-#     light.tafel_2:
-#       expose: false
-#     light.woonkamer_lampen:
-#       expose: false
-
-# https://www.home-assistant.io/components/device_tracker.nmap_tracker/
-# device_tracker:
-#   - platform: nmap_tracker
-#     hosts: 192.168.1.0/24
-#     home_interval: 10
-#     exclude:
-#       - 192.168.1.18
-#       - 192.168.1.19
-
-# Cloud
-# cloud:
-
-# panel_iframe:
-#  nodered:
-#    title: 'Node-Red'
-#    icon: 'mdi:shuffle-variant'
-#    url: 'http://192.168.1.18:1880/'
 
 # enable mqtt logging
 logger:

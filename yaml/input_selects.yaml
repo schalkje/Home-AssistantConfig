@@ -1,0 +1,8 @@
+wc1_status:
+  name: WC 1 Status
+  options:
+    - open
+    - in
+    - out
+  initial: out
+  icon: mdi:door

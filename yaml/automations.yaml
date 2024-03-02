@@ -1,3 +1,36 @@
+- alias: WC1 - Turn on light on door open or motion detected
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.wc_movement_konke_155f07fe_ias_zone
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.lumi_lumi_sensor_magnet_aq2_064cdd01_on_off
+      to: "on"
+  action:
+    - service: light.turn_on
+      entity_id: light.ikea_of_sweden_tradfri_bulb_e27_ww_clear_250lm_af3d25fe_level_on_off
+- alias: WC1 - Turn off light after 1 minute if no motion and door closes
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.wc_movement_konke_155f07fe_ias_zone
+      to: "off"
+      for:
+        minutes: 3
+    - platform: state
+      entity_id: binary_sensor.lumi_lumi_sensor_magnet_aq2_064cdd01_on_off
+      to: "off"
+      for:
+        seconds: 10
+  condition:
+    - condition: state
+      entity_id: binary_sensor.wc_movement_konke_155f07fe_ias_zone
+      state: "off"
+      for:
+        seconds: 10
+  action:
+    - service: light.turn_off
+      entity_id: light.ikea_of_sweden_tradfri_bulb_e27_ww_clear_250lm_af3d25fe_level_on_off
+
 - alias: Power state on HA start-up
   trigger:
     platform: homeassistant
@@ -18,93 +51,6 @@
     service: notify.ios_your_iphone
     data:
       message: Warning - Failed login attempt detected.
-# - id: '1612298202703'
-#   alias: Ikea - Power
-#   description: ''
-#   trigger:
-#   - device_id: 8983f5c81ed42d38db2861ef87c9b901
-#     domain: zha
-#     platform: device
-#     type: remote_button_short_press
-#     subtype: turn_on
-#   condition: []
-#   action:
-#   - type: toggle
-#     device_id: f45a011221e9e2d6825a3cb5f8343c9d
-#     entity_id: light.ikea_of_sweden_tradfri_bulb_e14_w_op_ch_400lm_c4e590fe_level_on_off
-#     domain: light
-#   mode: single
-# - id: '1612343689171'
-#   alias: Ikea - Dim Up
-#   description: ''
-#   trigger:
-#   - device_id: 8983f5c81ed42d38db2861ef87c9b901
-#     domain: zha
-#     platform: device
-#     type: remote_button_short_press
-#     subtype: dim_up
-#   condition: []
-#   action:
-#   - type: brightness_increase
-#     device_id: f45a011221e9e2d6825a3cb5f8343c9d
-#     entity_id: light.ikea_of_sweden_tradfri_bulb_e14_w_op_ch_400lm_c4e590fe_level_on_off
-#     domain: light
-#   mode: single
-# - id: '1612343780144'
-#   alias: Ikea - Dim down
-#   description: ''
-#   trigger:
-#   - device_id: 8983f5c81ed42d38db2861ef87c9b901
-#     domain: zha
-#     platform: device
-#     type: remote_button_short_press
-#     subtype: dim_down
-#   condition: []
-#   action:
-#   - type: brightness_decrease
-#     device_id: f45a011221e9e2d6825a3cb5f8343c9d
-#     entity_id: light.ikea_of_sweden_tradfri_bulb_e14_w_op_ch_400lm_c4e590fe_level_on_off
-#     domain: light
-#   mode: queued
-#   max: 10
-# - id: '1612343950495'
-#   alias: Ikea - Left
-#   description: ''
-#   trigger:
-#   - device_id: 8983f5c81ed42d38db2861ef87c9b901
-#     domain: zha
-#     platform: device
-#     type: remote_button_short_press
-#     subtype: right
-#   condition: []
-#   action:
-#   - type: flash
-#     device_id: f45a011221e9e2d6825a3cb5f8343c9d
-#     entity_id: light.ikea_of_sweden_tradfri_bulb_e14_w_op_ch_400lm_c4e590fe_level_on_off
-#     domain: light
-#   mode: single
-# - id: '1613067972742'
-#   alias: ZHA - IKEA five button remote
-#   description: ''
-#   use_blueprint:
-#     path: wormie_dk/zha-ikea-five-button-remote.yaml
-#     input:
-#       button_on_off:
-#       - type: toggle
-#         device_id: e6c1a63886c170df00b842a25889fc14
-#         entity_id: light.ikea_of_sweden_tradfri_bulb_e27_ww_clear_250lm_af3d25fe_level_on_off
-#         domain: light
-#       remote: 8983f5c81ed42d38db2861ef87c9b901
-#       button_brightness_up_short:
-#       - type: toggle
-#         device_id: f45a011221e9e2d6825a3cb5f8343c9d
-#         entity_id: light.ikea_of_sweden_tradfri_bulb_e14_w_op_ch_400lm_c4e590fe_level_on_off
-#         domain: light
-#       button_right_short:
-#       - type: toggle
-#         device_id: 028ef20450e7b8006aed56592c992065
-#         entity_id: light.ikea_of_sweden_tradfri_bulb_e27_opal_1000lm_741a49fe_level_on_off
-#         domain: light
 - id: "1613074545149"
   alias: WC1 - Yet Another Motion Automation
   description: ""
@@ -183,19 +129,6 @@
           entity_id: switch.tasmota_3_1
           domain: switch
       button_long_press: []
-- id: "1626609860346"
-  alias: Schalken Toilet Light
-  description: ""
-  use_blueprint:
-    path: schalken/toilet_light.yaml
-    input:
-      motion_entity: binary_sensor.wc_movement_konke_155f07fe_ias_zone
-      magnet_entity: binary_sensor.lumi_lumi_sensor_magnet_aq2_064cdd01_on_off
-      light_target:
-        entity_id: light.ikea_of_sweden_tradfri_bulb_e27_ww_clear_250lm_af3d25fe_level_on_off
-      no_motion_wait: 120
-      door_close_wait: 10
-      door_open_wait: 35
 - id: "1627458339900"
   alias: "Ikea 5-remote "
   description: Woonkamer
