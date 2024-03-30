@@ -7,6 +7,9 @@
 .cloud
 .google.token
 
+# Ignore files
+*.bkp
+
 
 # You can whitelist files/folders with !, these will not be ignored.
 !*.yaml

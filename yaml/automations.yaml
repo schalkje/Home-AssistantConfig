@@ -9,6 +9,16 @@
       target:
         entity_id: light.ikea_of_sweden_tradfri_bulb_e27_ww_clear_250lm_af3d25fe_level_on_off
 
+- alias: "WC 1 Light On When Open WC Door"
+  trigger:
+    - platform: state
+      entity_id: input_select.wc1_status
+      to: "in"
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.ikea_of_sweden_tradfri_bulb_e27_ww_clear_250lm_af3d25fe_level_on_off
+
 - alias: "WC 1 Light Off When going Out the WC"
   trigger:
     - platform: state
@@ -174,29 +184,6 @@
     service: notify.ios_your_iphone
     data:
       message: Warning - Failed login attempt detected.
-- id: "1613074545149"
-  alias: WC1 - Yet Another Motion Automation
-  description: ""
-  use_blueprint:
-    path: networkingcat/yet_another_motion_automation.yaml
-    input:
-      no_motion_wait: "120"
-      motion_entity: group.wc_motion
-      light_target:
-        entity_id: light.ikea_of_sweden_tradfri_bulb_e27_ww_clear_250lm_af3d25fe_level_on_off
-      time_scene_night: 0:00:00
-      time_scene_evening: 0:00:00
-- id: "1613503640920"
-  alias: Door magnet and motion
-  description: ""
-  use_blueprint:
-    path: schalken/door-magnet-and-motion.yaml
-    input:
-      door_sensor: binary_sensor.test_lumi_magnet_on_off
-      motion_sensor: binary_sensor.lumi_sensor_motion_1_zone
-      light: light.test_ikea_e27_806lm
-      wait-for-movement-duration: "6"
-      duration: "31"
 - id: "1613726721789"
   alias: "Jeroen - bed lamp switch "
   description: ZHA - Aqara Wireless Mini Switch
