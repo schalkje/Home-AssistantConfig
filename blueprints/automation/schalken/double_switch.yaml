@@ -1,22 +1,38 @@
 blueprint:
-  name: Double Switch Sync (with context filtering)
-  description: "Sync two switches so they control each other without retriggering loops."
+  name: Double Switch Sync (Improved)
+  description: |
+    ## Double Switch Sync v2.0.0
+
+    Sync the on/off state of two switches, ensuring that when one switch is turned on or off, the other one follows without creating loops. This avoids retriggering and works with any switches that support `homeassistant.turn_on` and `homeassistant.turn_off` services.
+
+    ### Requirements
+    * Both switches MUST support `homeassistant.turn_on` and `homeassistant.turn_off`.
+    * Home Assistant 2022.5.0 or newer is required.
   domain: automation
+  homeassistant:
+    min_version: 2022.5.0
+
   input:
     switch_1:
-      name: Switch 1
+      name: First Switch
       description: "First switch entity (e.g., tasmota_17_1)"
       selector:
         entity:
           domain: switch
     switch_2:
-      name: Switch 2
+      name: Second Switch
       description: "Second switch entity (e.g., tasmota_17_2)"
       selector:
         entity:
           domain: switch
 
-mode: restart
+mode: queued
+max_exceeded: silent
+
+variables:
+  switches:
+    - !input "switch_1"
+    - !input "switch_2"
 
 trigger:
   - platform: state
@@ -24,74 +40,24 @@ trigger:
   - platform: state
     entity_id: !input "switch_2"
 
-condition: []
+condition:
+  # Check if the state actually changed
+  - condition: template
+    value_template: "{{ trigger.to_state.state != trigger.from_state.state }}"
+
+  # Ensure the new state is either 'on' or 'off'
+  - condition: template
+    value_template: '{{ (trigger.to_state.state == "on") or (trigger.to_state.state == "off") }}'
+
+  # Prevent retriggering if the state change was caused by the same automation
+  - condition: template
+    value_template: "{{ trigger.to_state.context.parent_id is none or (trigger.to_state.context.id != this.context.id and trigger.to_state.context.parent_id != this.context.id) }}"
 
 action:
-  - choose:
-      # When switch_1 turns on, turn switch_2 on (only if the change was not caused by this automation)
-      - conditions:
-          - condition: state
-            entity_id: !input "switch_1"
-            state: "on"
-          - condition: state
-            entity_id: !input "switch_2"
-            state: "off"
-          - condition: template
-            value_template: >
-              {{ trigger.to_state.context.parent_id is none }}
-
-        sequence:
-          - service: switch.turn_on
-            target:
-              entity_id: !input "switch_2"
-
-      # When switch_1 turns off, turn switch_2 off (only if the change was not caused by this automation)
-      - conditions:
-          - condition: state
-            entity_id: !input "switch_1"
-            state: "off"
-          - condition: state
-            entity_id: !input "switch_2"
-            state: "on"
-          - condition: template
-            value_template: >
-              {{ trigger.to_state.context.parent_id is none }}
-
-        sequence:
-          - service: switch.turn_off
-            target:
-              entity_id: !input "switch_2"
-
-      # When switch_2 turns on, turn switch_1 on (only if the change was not caused by this automation)
-      - conditions:
-          - condition: state
-            entity_id: !input "switch_2"
-            state: "on"
-          - condition: state
-            entity_id: !input "switch_1"
-            state: "off"
-          - condition: template
-            value_template: >
-              {{ trigger.to_state.context.parent_id is none }}
-
-        sequence:
-          - service: switch.turn_on
-            target:
-              entity_id: !input "switch_1"
-
-      # When switch_2 turns off, turn switch_1 off (only if the change was not caused by this automation)
-      - conditions:
-          - condition: state
-            entity_id: !input "switch_2"
-            state: "off"
-          - condition: state
-            entity_id: !input "switch_1"
-            state: "on"
-          - condition: template
-            value_template: >
-              {{ trigger.to_state.context.parent_id is none }}
-
-        sequence:
-          - service: switch.turn_off
-            target:
-              entity_id: !input "switch_1"
+  # Toggle the other switch based on the new state of the triggering switch
+  # - service: homeassistant.turn_{{ trigger.to_state.state }}
+  # - service: homeassistant.turn_on
+  - service: switch.turn_{{ trigger.to_state.state }}
+    target:
+      entity_id: >
+        {{ expand(switches) | selectattr('entity_id', '!=', trigger.entity_id) | map(attribute='entity_id') | list }}

@@ -112,3 +112,5 @@ logger:
   logs:
     homeassistant.components.mqtt: info
     homeassistant.components.recorder.migration: info
+    homeassistant.components.automation: debug
+    homeassistant.components.script: debug
