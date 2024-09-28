@@ -1,3 +1,7 @@
+############################################################################################################
+# Begane grond
+#
+
 # Wc1 light automation
 - alias: "WC 1 Light On When Open WC Door"
   trigger:
@@ -163,7 +167,10 @@
       data:
         option: "out"
 
+############################################################################################################
 # Other configuuration
+#
+
 - alias: Power state on HA start-up
   trigger:
     platform: homeassistant
@@ -184,6 +191,11 @@
     service: notify.ios_your_iphone
     data:
       message: Warning - Failed login attempt detected.
+
+############################################################################################################
+# Zolder
+#
+
 - id: "1613726721789"
   alias: "Jeroen - bed lamp switch "
   description: ZHA - Aqara Wireless Mini Switch
@@ -205,22 +217,7 @@
           data: {}
           entity_id: group.master_lights
       aqara_mini_switch: 4d0dad1a8c5f81044113007ab77d8792
-- id: "1626414640595"
-  alias: Bureaulicht Jeroen aan
-  description: ""
-  trigger:
-    - device_id: 45ec225df75053dccc34ee69d97868fd
-      domain: zha
-      platform: device
-      type: remote_button_short_press
-      subtype: remote_button_short_press
-  condition: []
-  action:
-    - type: toggle
-      device_id: 8271b699a77443cdb3d2a4b3010d299b
-      entity_id: switch.tasmota_24_1
-      domain: switch
-  mode: single
+
 - id: "1626459470208"
   alias: "Maria - bed lamp switch "
   description: ZHA - Aqara Wireless Mini Switch
@@ -239,6 +236,97 @@
           entity_id: switch.tasmota_3_1
           domain: switch
       button_long_press: []
+
+############################################################################################################
+# Kantoor
+#
+
+- id: "1635954827756"
+  alias: Bureau Jeroen mini
+  description: ""
+  use_blueprint:
+    path: SeanM/zha-aqara-wireless-mini-switch.yaml
+    input:
+      aqara_mini_switch: 45ec225df75053dccc34ee69d97868fd
+      button_single_press:
+        - type: toggle
+          device_id: 8271b699a77443cdb3d2a4b3010d299b
+          entity_id: switch.tasmota_24_1
+          domain: switch
+      button_double_press:
+        - type: toggle
+          device_id: 8271b699a77443cdb3d2a4b3010d299b
+          entity_id: switch.tasmota_24_2
+          domain: switch
+      button_long_press:
+        - type: toggle
+          device_id: 8271b699a77443cdb3d2a4b3010d299b
+          entity_id: switch.tasmota_24_3
+          domain: switch
+
+# - id: "1626414640595"
+#   alias: Bureaulicht Jeroen aan
+#   description: ""
+#   trigger:
+#     - device_id: 45ec225df75053dccc34ee69d97868fd
+#       domain: zha
+#       platform: device
+#       type: remote_button_short_press
+#       subtype: remote_button_short_press
+#   condition: []
+#   action:
+#     - type: toggle
+#       device_id: 8271b699a77443cdb3d2a4b3010d299b
+#       entity_id: switch.tasmota_24_1
+#       domain: switch
+#   mode: single
+
+############################################################################################################
+# Woonkamer
+#
+
+# bollamp
+- alias: "Turn on Bollamp when Tasmota switch is on"
+  trigger:
+    - platform: state
+      entity_id: switch.tasmota_2_3
+      to: "on"
+  action:
+    - service: light.turn_on
+      entity_id: light.bollamp_new
+
+- alias: "Turn off Bollamp when Tasmota switch is off"
+  trigger:
+    - platform: state
+      entity_id: switch.tasmota_2_3
+      to: "off"
+  action:
+    - service: light.turn_off
+      entity_id: light.bollamp_new
+
+# Eettafel
+- alias: "Turn on Tafel lights when Tasmota switch is on"
+  trigger:
+    - platform: state
+      entity_id: switch.tasmota_2_2
+      to: "on"
+  action:
+    - service: light.turn_on
+      entity_id:
+        - light.tafel_1_new
+        - light.tafel_2_new_2
+
+- alias: "Turn off Tafel lights when Tasmota switch is off"
+  trigger:
+    - platform: state
+      entity_id: switch.tasmota_2_2
+      to: "off"
+  action:
+    - service: light.turn_off
+      entity_id:
+        - light.tafel_1_new
+        - light.tafel_2_new_2
+
 - id: "1627458339900"
   alias: "Ikea 5-remote "
   description: Woonkamer
@@ -282,25 +370,3 @@
           domain: light
           entity_id: light.tafel_2_new
           type: brightness_decrease
-- id: "1635954827756"
-  alias: Bureau Jeroen mini
-  description: ""
-  use_blueprint:
-    path: SeanM/zha-aqara-wireless-mini-switch.yaml
-    input:
-      aqara_mini_switch: 45ec225df75053dccc34ee69d97868fd
-      button_single_press:
-        - type: toggle
-          device_id: 8271b699a77443cdb3d2a4b3010d299b
-          entity_id: switch.tasmota_24_1
-          domain: switch
-      button_double_press:
-        - type: toggle
-          device_id: 8271b699a77443cdb3d2a4b3010d299b
-          entity_id: switch.tasmota_24_2
-          domain: switch
-      button_long_press:
-        - type: toggle
-          device_id: 8271b699a77443cdb3d2a4b3010d299b
-          entity_id: switch.tasmota_24_3
-          domain: switch

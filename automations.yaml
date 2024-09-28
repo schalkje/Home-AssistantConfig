@@ -1,0 +1,34 @@
+# - id: '1727513880917'
+#   alias: Aanrecht lamp
+#   description: ''
+#   use_blueprint:
+#     path: schalken/link_switches.yaml
+#     input:
+#       linked_entities:
+#       - switch.tasmota_17_2
+#       - switch.tasmota_1_1
+# - id: '1727513954376'
+#   alias: Keukentafel
+#   description: ''
+#   use_blueprint:
+#     path: schalken/link_switches.yaml
+#     input:
+#       linked_entities:
+#       - switch.tasmota_17_1
+#       - switch.tasmota_1_2
+- id: "1727514226102"
+  alias: Keukentafel - Double Switch
+  description: ""
+  use_blueprint:
+    path: schalken/double_switch.yaml
+    input:
+      switch_1: switch.tasmota_17_1
+      switch_2: switch.tasmota_1_2
+- id: "1727514271382"
+  alias: Aanrechtlamp - Double Switch
+  description: ""
+  use_blueprint:
+    path: schalken/double_switch.yaml
+    input:
+      switch_1: switch.tasmota_1_1
+      switch_2: switch.tasmota_17_2
