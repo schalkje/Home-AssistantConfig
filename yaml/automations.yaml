@@ -65,6 +65,28 @@
         - switch.tasmota_23_2
         - switch.tasmota_5_1
 
+- id: "6727522547576"
+  alias: WoonkamerTrapLamp
+  description: ""
+  use_blueprint:
+    path: schalken/link_switches.yaml
+    input:
+      linked_entities:
+        - switch.tasmota_7
+        - switch.tasmota_23_1
+        - light.ikea_of_sweden_tradfri_bulb_e27_ww_806lm_d36274fe_level_on_off
+
+- id: "6727522547571"
+  alias: ZolderTrapLamp
+  description: ""
+  use_blueprint:
+    path: schalken/link_switches.yaml
+    input:
+      linked_entities:
+        - switch.sonoff_zolder_bottom1
+        - switch.sonoff_zolder_top1
+        - light.ikea_of_sweden_tradfri_bulb_e27_ww_clear_250lm_74a533fe_level_on_off
+
 - id: "1727522547577"
   alias: Hal1AllLights
   description: ""
