@@ -1,0 +1,99 @@
+blueprint:
+  name: Main Switch Control (Trigger-Based Logic)
+  description: |
+    This blueprint creates a main switch that controls and monitors the state of multiple linked entities.
+
+    - If any of the linked entities is turned on, the main switch will turn on.
+    - If all linked entities are turned off, the main switch will turn off.
+    - If the main switch is toggled, all linked entities will be turned on or off accordingly.
+    - Retriggering of the blueprint is prevented to avoid feedback loops when the state changes are caused by the automation itself.
+
+  domain: automation
+  input:
+    main_switch:
+      name: Main Switch
+      description: "The switch that controls all linked entities."
+      selector:
+        entity:
+          domain: switch
+    linked_entities:
+      name: Linked Entities
+      description: "Entities that will be controlled by the main switch and influence its state."
+      selector:
+        entity:
+          multiple: true
+
+mode: queued
+max_exceeded: silent
+
+variables:
+  linked_entities: !input linked_entities
+  main_switch: !input main_switch
+
+trigger:
+  # Trigger on state changes of the linked entities or the main switch
+  - platform: state
+    entity_id: !input linked_entities
+  - platform: state
+    entity_id: !input main_switch
+
+condition: []
+
+action:
+  - choose:
+      # Case 1: If the main switch was triggered
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.entity_id == main_switch }}"
+        sequence:
+          - choose:
+              # If the main switch is turned on, turn on all linked entities
+              - conditions:
+                  - condition: state
+                    entity_id: !input main_switch
+                    state: "on"
+                sequence:
+                  - service: homeassistant.turn_on
+                    target:
+                      entity_id: !input linked_entities
+              # If the main switch is turned off, turn off all linked entities
+              - conditions:
+                  - condition: state
+                    entity_id: !input main_switch
+                    state: "off"
+                sequence:
+                  - service: homeassistant.turn_off
+                    target:
+                      entity_id: !input linked_entities
+
+      # Case 2: If a linked entity was triggered
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.entity_id in linked_entities }}"
+        sequence:
+          # If any linked entity is on, turn on the main switch (but don't toggle linked entities)
+          - choose:
+              - conditions:
+                  - condition: template
+                    value_template: >
+                      {{ expand(linked_entities) | selectattr('state', 'eq', 'on') | list | length > 0 }}
+                  - condition: state
+                    entity_id: !input main_switch
+                    state: "off" # Only turn the main switch on if it's currently off
+                sequence:
+                  - service: switch.turn_on
+                    target:
+                      entity_id: !input main_switch
+
+              # If all linked entities are off, turn off the main switch (but don't toggle linked entities)
+              - conditions:
+                  - condition: template
+                    value_template: >
+                      {{ expand(linked_entities) | selectattr('state', 'eq', 'on') | list | length == 0 }}
+                  - condition: state
+                    entity_id: !input main_switch
+                    state: "on" # Only turn the main switch off if it's currently on
+                sequence:
+                  - service: switch.turn_off
+                    target:
+                      entity_id: !input main_switch

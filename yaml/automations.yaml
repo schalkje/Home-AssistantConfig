@@ -16,6 +16,56 @@
       switch_1: switch.tasmota_1_1
       switch_2: switch.tasmota_17_2
 
+- id: "1727515368939"
+  alias: Keukentafel
+  description: ""
+  use_blueprint:
+    path: schalken/double_switch.yaml
+    input:
+      switch_1: switch.tasmota_1_1
+      switch_2: switch.tasmota_17_2
+
+# - id: "7275153689392"
+#   alias: Keukentafel
+#   description: ""
+#   use_blueprint:
+#     path: schalken/double_switch.yaml
+#     input:
+#       switch_1: group.woonkamer
+#       switch_2: switch.tasmota_11_1
+
+# - id: "7275153689391"
+#   alias: Hal2Lamp
+#   description: ""
+#   use_blueprint:
+#     path: schalken/double_switch.yaml
+#     input:
+#       switch_1: switch.tasmota_4
+#       switch_2: switch.tasmota_5_2
+
+- id: "1727522547570"
+  alias: Hal2Lamp
+  description: ""
+  use_blueprint:
+    path: schalken/link_switches.yaml
+    input:
+      linked_entities:
+        - switch.tasmota_4
+        - switch.tasmota_5_2
+        - switch.tasmota_11_3
+
+- id: "1727524849980"
+  alias: Main switch woonkamer - in keuken
+  description: ""
+  use_blueprint:
+    path: schalken/main_switch.yaml
+    input:
+      main_switch: switch.tasmota_11_1
+      linked_entities:
+        - switch.tasmota_2_2
+        - switch.tasmota_2_1
+        - switch.tasmota_2_3
+
 ############################################################################################################
 # Begane grond
 #
