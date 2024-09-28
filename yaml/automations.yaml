@@ -54,6 +54,27 @@
         - switch.tasmota_5_2
         - switch.tasmota_11_3
 
+- id: "1727522547576"
+  alias: Keukenmuurlamp
+  description: ""
+  use_blueprint:
+    path: schalken/link_switches.yaml
+    input:
+      linked_entities:
+        - switch.tasmota_11_2
+        - switch.tasmota_23_2
+        - switch.tasmota_5_1
+
+- id: "1727522547577"
+  alias: Hal1AllLights
+  description: ""
+  use_blueprint:
+    path: schalken/main_switch.yaml
+    input:
+      main_switch: switch.tasmota_22_1
+      linked_entities:
+        - group.all_lights
+
 - id: "1727524849980"
   alias: Main switch woonkamer - in keuken
   description: ""
@@ -365,25 +386,14 @@
         - light.bollamp_new
 
 # Eettafel
-- alias: "Turn on Tafel lights when Tasmota switch is on"
-  trigger:
-    - platform: state
-      entity_id: switch.tasmota_2_2
-      to: "on"
-  action:
-    - service: light.turn_on
-      entity_id:
-        - light.tafel_1_new
-        - light.tafel_2_new_2
-
-- alias: "Turn off Tafel lights when Tasmota switch is off"
-  trigger:
-    - platform: state
-      entity_id: switch.tasmota_2_2
-      to: "off"
-  action:
-    - service: light.turn_off
-      entity_id:
+- id: "3727522547574"
+  alias: Eettafellamp
+  description: ""
+  use_blueprint:
+    path: schalken/link_switches.yaml
+    input:
+      linked_entities:
+        - switch.tasmota_2_2
         - light.tafel_1_new
         - light.tafel_2_new_2
 
