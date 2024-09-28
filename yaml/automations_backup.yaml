@@ -113,6 +113,18 @@
 # Begane grond
 #
 
+# - id: "1227529705866"
+#   alias: "WC 1 - Button"
+#   description: ZHA - Aqara Wireless Mini Switch
+#   use_blueprint:
+#     path: SeanM/zha-aqara-wireless-mini-switch.yaml
+#     input:
+#       button_single_press:
+#         - type: toggle
+#           device_id: ad2b2d4df76c4fc3ba2ba3902e20cbdf
+#           entity_id: light.ikea_of_sweden_tradfri_bulb_e27_ww_clear_250lm_af3d25fe_level_on_off
+#           domain: light
+
 # Wc1 light automation
 - alias: "WC 1 Light On When Open WC Door"
   trigger:

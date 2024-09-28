@@ -1,0 +1,415 @@
+- id: '1727515368938'
+  alias: Aanrecht
+  description: ''
+  use_blueprint:
+    path: schalken/double_switch.yaml
+    input:
+      switch_1: switch.tasmota_1_2
+      switch_2: switch.tasmota_17_1
+- id: '1727515368939'
+  alias: Keukentafel
+  description: ''
+  use_blueprint:
+    path: schalken/double_switch.yaml
+    input:
+      switch_1: switch.tasmota_1_1
+      switch_2: switch.tasmota_17_2
+- id: '1727515368939'
+  alias: Keukentafel
+  description: ''
+  use_blueprint:
+    path: schalken/double_switch.yaml
+    input:
+      switch_1: switch.tasmota_1_1
+      switch_2: switch.tasmota_17_2
+- id: '1727522547570'
+  alias: Hal2Lamp
+  description: ''
+  use_blueprint:
+    path: schalken/link_switches.yaml
+    input:
+      linked_entities:
+      - switch.tasmota_4
+      - switch.tasmota_5_2
+      - switch.tasmota_11_3
+- id: '1727522547576'
+  alias: Keukenmuurlamp
+  description: ''
+  use_blueprint:
+    path: schalken/link_switches.yaml
+    input:
+      linked_entities:
+      - switch.tasmota_11_2
+      - switch.tasmota_23_2
+      - switch.tasmota_5_1
+- id: '6727522547576'
+  alias: WoonkamerTrapLamp
+  description: ''
+  use_blueprint:
+    path: schalken/link_switches.yaml
+    input:
+      linked_entities:
+      - switch.tasmota_7
+      - switch.tasmota_23_1
+      - light.ikea_of_sweden_tradfri_bulb_e27_ww_806lm_d36274fe_level_on_off
+- id: '6727522547571'
+  alias: ZolderTrapLamp
+  description: ''
+  use_blueprint:
+    path: schalken/link_switches.yaml
+    input:
+      linked_entities:
+      - switch.sonoff_zolder_bottom1
+      - switch.sonoff_zolder_top1
+      - light.ikea_of_sweden_tradfri_bulb_e27_ww_clear_250lm_74a533fe_level_on_off
+- id: '1727522547577'
+  alias: Hal1AllLights
+  description: ''
+  use_blueprint:
+    path: schalken/main_switch.yaml
+    input:
+      main_switch: switch.tasmota_22_1
+      linked_entities:
+      - group.all_lights
+- id: '1727524849980'
+  alias: Main switch woonkamer - in keuken
+  description: ''
+  use_blueprint:
+    path: schalken/main_switch.yaml
+    input:
+      main_switch: switch.tasmota_11_1
+      linked_entities:
+      - switch.tasmota_2_2
+      - switch.tasmota_2_1
+      - switch.tasmota_2_3
+- alias: WC 1 Light On When Open WC Door
+  trigger:
+  - platform: state
+    entity_id: input_select.wc1_status
+    to: open
+  action:
+  - service: light.turn_on
+    target:
+      entity_id: light.ikea_of_sweden_tradfri_bulb_e27_ww_clear_250lm_af3d25fe_level_on_off
+  id: 9d19026ea90d48a6a4c7d1c8542a0fcf
+- alias: WC 1 Light On When Open WC Door
+  trigger:
+  - platform: state
+    entity_id: input_select.wc1_status
+    to: in
+  action:
+  - service: light.turn_on
+    target:
+      entity_id: light.ikea_of_sweden_tradfri_bulb_e27_ww_clear_250lm_af3d25fe_level_on_off
+  id: ce7e80e627b543cd92ba0138069e5c69
+- alias: WC 1 Light Off When going Out the WC
+  trigger:
+  - platform: state
+    entity_id: input_select.wc1_status
+    to: out
+  action:
+  - service: light.turn_off
+    target:
+      entity_id: light.ikea_of_sweden_tradfri_bulb_e27_ww_clear_250lm_af3d25fe_level_on_off
+  id: 883ddcd9b03740c0a744ee946a154ad4
+- alias: Set WC 1 Status to Open on Door Open
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.lumi_lumi_sensor_magnet_aq2_064cdd01_on_off
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: input_select.wc1_status
+    state: out
+  action:
+  - service: input_select.select_option
+    target:
+      entity_id: input_select.wc1_status
+    data:
+      option: open
+  id: 28c97fa714ad43c6865551f547a28df3
+- alias: Set WC 1 Status to In on Movement
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.wc_movement_konke_155f07fe_ias_zone
+    to: 'on'
+  action:
+  - service: input_select.select_option
+    target:
+      entity_id: input_select.wc1_status
+    data:
+      option: in
+  id: 050b0008cf304dd8b00d195a8095c5dc
+- alias: Set WC 1 Status to Out on Door Closed
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.lumi_lumi_sensor_magnet_aq2_064cdd01_on_off
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: input_select.wc1_status
+    state: open
+  action:
+  - service: input_select.select_option
+    target:
+      entity_id: input_select.wc1_status
+    data:
+      option: out
+  id: b323556ebcb64a858856cd73fc6bd1e7
+- alias: Set WC 1 Status to Out on Door Closed When In
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.lumi_lumi_sensor_magnet_aq2_064cdd01_on_off
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: input_select.wc1_status
+    state: in
+    for:
+      seconds: 10
+  action:
+  - service: input_select.select_option
+    target:
+      entity_id: input_select.wc1_status
+    data:
+      option: out
+  id: f9a9f8b7df41409ebef69735c2f5729d
+- alias: Set WC 1 Status to In on Movement When Out
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.wc_movement_konke_155f07fe_ias_zone
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: input_select.wc1_status
+    state: out
+  action:
+  - service: input_select.select_option
+    target:
+      entity_id: input_select.wc1_status
+    data:
+      option: in
+  id: 4cad194c51544c6f8c6b9e77b7d9c024
+- alias: WC 1 Status to In on Door Open with Motion
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.lumi_lumi_sensor_magnet_aq2_064cdd01_on_off
+    to: 'on'
+  condition:
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: input_select.wc1_status
+      state: out
+    - condition: state
+      entity_id: binary_sensor.wc_movement_konke_155f07fe_ias_zone
+      state: 'on'
+  action:
+  - service: input_select.select_option
+    target:
+      entity_id: input_select.wc1_status
+    data:
+      option: in
+  id: 53f14d83292741109e19d288061b9483
+- alias: Start WC 1 Timer on Open
+  trigger:
+  - platform: state
+    entity_id: input_select.wc1_status
+    to: open
+  action:
+  - service: timer.start
+    target:
+      entity_id: timer.wc1_status_timer
+  id: 6cb11ebeb28a429e8d726d40a407dc52
+- alias: Start WC 1 Timer on In
+  trigger:
+  - platform: state
+    entity_id: input_select.wc1_status
+    to: in
+  action:
+  - service: timer.start
+    target:
+      entity_id: timer.wc1_status_timer
+  id: c706982c7d4646a7964642d87354cfab
+- alias: Set WC 1 Status to Out After Timer
+  trigger:
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.wc1_status_timer
+  action:
+  - service: input_select.select_option
+    target:
+      entity_id: input_select.wc1_status
+    data:
+      option: out
+  id: 2e2a349ff0164ec48e2237d6c50c4213
+- alias: Power state on HA start-up
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+  - service: mqtt.publish
+    data:
+      topic: sonoffs/cmnd/state
+      payload: ''
+  id: 50fad415012446deba4dfbf4ee32815d
+- id: login_failure
+  alias: Login Failure
+  trigger:
+    platform: template
+    value_template: '{{ states(''persistent_notification.httplogin'') != ''unknown''
+      }}'
+  action:
+    service: notify.ios_your_iphone
+    data:
+      message: Warning - Failed login attempt detected.
+- id: '1613726721789'
+  alias: 'Jeroen - bed lamp switch '
+  description: ZHA - Aqara Wireless Mini Switch
+  use_blueprint:
+    path: SeanM/zha-aqara-wireless-mini-switch.yaml
+    input:
+      button_single_press:
+      - type: toggle
+        device_id: ad2b2d4df76c4fc3ba2ba3902e20cbdf
+        entity_id: switch.tasmota_3_1
+        domain: switch
+      button_double_press:
+      - type: toggle
+        device_id: ad2b2d4df76c4fc3ba2ba3902e20cbdf
+        entity_id: switch.tasmota_3_2
+        domain: switch
+      button_long_press:
+      - action: homeassistant.toggle
+        target:
+          entity_id:
+          - group.woonkamer
+        data: {}
+      aqara_mini_switch: 4d0dad1a8c5f81044113007ab77d8792
+- id: '1626459470208'
+  alias: 'Maria - bed lamp switch '
+  description: ZHA - Aqara Wireless Mini Switch
+  use_blueprint:
+    path: SeanM/zha-aqara-wireless-mini-switch.yaml
+    input:
+      aqara_mini_switch: 789b9f5bc25ea05544feaa15cb9165a8
+      button_single_press:
+      - type: toggle
+        device_id: ad2b2d4df76c4fc3ba2ba3902e20cbdf
+        entity_id: switch.tasmota_3_2
+        domain: switch
+      button_double_press:
+      - type: toggle
+        device_id: ad2b2d4df76c4fc3ba2ba3902e20cbdf
+        entity_id: switch.tasmota_3_1
+        domain: switch
+      button_long_press: []
+- id: '1635954827756'
+  alias: Bureau Jeroen mini
+  description: ''
+  use_blueprint:
+    path: SeanM/zha-aqara-wireless-mini-switch.yaml
+    input:
+      aqara_mini_switch: 45ec225df75053dccc34ee69d97868fd
+      button_single_press:
+      - type: toggle
+        device_id: 8271b699a77443cdb3d2a4b3010d299b
+        entity_id: switch.tasmota_24_1
+        domain: switch
+      button_double_press:
+      - type: toggle
+        device_id: 8271b699a77443cdb3d2a4b3010d299b
+        entity_id: switch.tasmota_24_2
+        domain: switch
+      button_long_press:
+      - type: toggle
+        device_id: 8271b699a77443cdb3d2a4b3010d299b
+        entity_id: switch.tasmota_24_3
+        domain: switch
+- id: '3727522547573'
+  alias: Bollamp
+  description: ''
+  use_blueprint:
+    path: schalken/link_switches.yaml
+    input:
+      linked_entities:
+      - switch.tasmota_2_3
+      - light.bollamp_new
+- id: '3727522547574'
+  alias: Eettafellamp
+  description: ''
+  use_blueprint:
+    path: schalken/link_switches.yaml
+    input:
+      linked_entities:
+      - switch.tasmota_2_2
+      - light.tafel_1_new
+      - light.tafel_2_new_2
+- id: '1627458339900'
+  alias: 'Ikea 5-remote '
+  description: Woonkamer
+  use_blueprint:
+    path: niro1987/zha_ikea_tradfri_5button_remote_custom.yaml
+    input:
+      remote: 4e3a251021e3bf8ef6bd97679dff815a
+      power_short:
+      - service: homeassistant.toggle
+        target:
+          device_id: ed8f64d88a667f81b7b52de6c3e19c14
+      power_long:
+      - service: light.toggle
+        target:
+          entity_id: light.eettafel
+      dimup_short:
+      - device_id: ed8f64d88a667f81b7b52de6c3e19c14
+        domain: light
+        entity_id: light.bollamp_new
+        type: brightness_increase
+      dimdown_short:
+      - device_id: ed8f64d88a667f81b7b52de6c3e19c14
+        domain: light
+        entity_id: light.bollamp_new
+        type: brightness_decrease
+      colorup_short:
+      - device_id: 2772d123b3f2942e924ce87e5367fdb7
+        domain: light
+        entity_id: light.tafel_1_new
+        type: brightness_increase
+      - device_id: 0f2258249aa9cd44d07a0f973705ac26
+        domain: light
+        entity_id: light.tafel_2_new
+        type: brightness_increase
+      colordown_short:
+      - device_id: 2772d123b3f2942e924ce87e5367fdb7
+        domain: light
+        entity_id: light.tafel_1_new
+        type: brightness_decrease
+      - device_id: 0f2258249aa9cd44d07a0f973705ac26
+        domain: light
+        entity_id: light.tafel_2_new
+        type: brightness_decrease
+- id: '1727531750279'
+  alias: WC 1 - Lamp backup switch
+  description: ''
+  use_blueprint:
+    path: SeanM/zha-aqara-wireless-mini-switch.yaml
+    input:
+      aqara_mini_switch: 35b0e8d78030072b97490ed00acde3b6
+      button_single_press:
+      - type: toggle
+        device_id: 841d073194fb57b1d0c377c35b9c1db6
+        entity_id: 6e231a68f5d5e5467fd45e566e2af9cb
+        domain: light
+- id: '1727532038321'
+  alias: Extra switch toggle
+  description: ''
+  use_blueprint:
+    path: SeanM/zha-aqara-wireless-mini-switch.yaml
+    input:
+      aqara_mini_switch: 77667ec65f6dc86acb72bde85e9e56f0
+      button_single_press:
+      - type: toggle
+        device_id: 8271b699a77443cdb3d2a4b3010d299b
+        entity_id: 0eed1b7b76b9e0f0adc9cdb2bf534fb2
+        domain: switch

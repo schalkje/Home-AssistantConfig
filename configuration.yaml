@@ -17,7 +17,7 @@ homeassistant:
     - type: homeassistant
   time_zone: Europe/Amsterdam
 
-automation: !include yaml/automations.yaml
+automation: !include automations.yaml
 group: !include yaml/groups.yaml
 input_boolean: !include yaml/input_booleans.yaml
 input_select: !include yaml/input_selects.yaml
