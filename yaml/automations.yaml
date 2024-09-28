@@ -354,23 +354,15 @@
 #
 
 # bollamp
-- alias: "Turn on Bollamp when Tasmota switch is on"
-  trigger:
-    - platform: state
-      entity_id: switch.tasmota_2_3
-      to: "on"
-  action:
-    - service: light.turn_on
-      entity_id: light.bollamp_new
-
-- alias: "Turn off Bollamp when Tasmota switch is off"
-  trigger:
-    - platform: state
-      entity_id: switch.tasmota_2_3
-      to: "off"
-  action:
-    - service: light.turn_off
-      entity_id: light.bollamp_new
+- id: "3727522547573"
+  alias: Bollamp
+  description: ""
+  use_blueprint:
+    path: schalken/link_switches.yaml
+    input:
+      linked_entities:
+        - switch.tasmota_2_3
+        - light.bollamp_new
 
 # Eettafel
 - alias: "Turn on Tafel lights when Tasmota switch is on"

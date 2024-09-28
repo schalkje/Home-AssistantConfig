@@ -43,6 +43,6 @@ condition:
     value_template: "{{trigger.to_state.context.parent_id is none or (trigger.to_state.context.id != this.context.id and trigger.to_state.context.parent_id != this.context.id) }}"
 
 action:
-  - service: switch.turn_{{ trigger.to_state.state }}
+  - service: homeassistant.turn_{{ trigger.to_state.state }}
     target:
       entity_id: '{{ expand(linked_entities) | selectattr("entity_id", "!=", trigger.entity_id) | map(attribute="entity_id") | list }}'
