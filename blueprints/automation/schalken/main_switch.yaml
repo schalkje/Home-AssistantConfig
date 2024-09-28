@@ -1,11 +1,12 @@
 blueprint:
-  name: Main Switch Control (Trigger-Based Logic)
+  name: Main Switch Control (with Context Check for User Trigger)
   description: |
     This blueprint creates a main switch that controls and monitors the state of multiple linked entities.
 
     - If any of the linked entities is turned on, the main switch will turn on.
     - If all linked entities are turned off, the main switch will turn off.
-    - If the main switch is toggled, all linked entities will be turned on or off accordingly.
+    - If the main switch is toggled by a user, all linked entities will be turned on or off accordingly.
+    - If a single linked entity is turned on manually, the main switch turns on but does not affect the other linked entities.
     - Retriggering of the blueprint is prevented to avoid feedback loops when the state changes are caused by the automation itself.
 
   domain: automation
@@ -41,10 +42,11 @@ condition: []
 
 action:
   - choose:
-      # Case 1: If the main switch was triggered
+      # Case 1: If the main switch was manually toggled by a user
       - conditions:
           - condition: template
-            value_template: "{{ trigger.entity_id == main_switch }}"
+            value_template: >
+              {{ trigger.entity_id == main_switch and trigger.to_state.context.user_id is not none }}
         sequence:
           - choose:
               # If the main switch is turned on, turn on all linked entities
@@ -71,8 +73,9 @@ action:
           - condition: template
             value_template: "{{ trigger.entity_id in linked_entities }}"
         sequence:
-          # If any linked entity is on, turn on the main switch (but don't toggle linked entities)
+          # Only update the main switch and do not touch other linked entities
           - choose:
+              # If any linked entity is on, turn on the main switch but don't touch other linked entities
               - conditions:
                   - condition: template
                     value_template: >
@@ -85,7 +88,7 @@ action:
                     target:
                       entity_id: !input main_switch
 
-              # If all linked entities are off, turn off the main switch (but don't toggle linked entities)
+              # If all linked entities are off, turn off the main switch but don't touch other linked entities
               - conditions:
                   - condition: template
                     value_template: >
