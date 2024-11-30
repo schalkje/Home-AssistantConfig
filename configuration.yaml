@@ -17,6 +17,9 @@ homeassistant:
     - type: homeassistant
   time_zone: Europe/Amsterdam
 
+bluetooth:
+  enable: false
+
 automation: !include automations.yaml
 group: !include yaml/groups.yaml
 input_boolean: !include yaml/input_booleans.yaml
